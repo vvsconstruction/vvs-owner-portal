@@ -1,0 +1,2005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,initial-scale=1.0">
+
+<title>VVS Construction | Attendance</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Poppins,sans-serif;
+}
+
+body{
+  background:#eef4fb;
+  color:#0b2545;
+  padding-bottom:85px;
+}
+
+/* HEADER */
+
+.header{
+  background:linear-gradient(135deg,#082a59,#114d9a);
+  color:white;
+  padding:18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 8px 25px rgba(0,0,0,.18);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.headerLeft{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.backBtn{
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:12px;
+  background:#FFD700;
+  color:#082a59;
+  font-size:22px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.headerTitle h2{
+  font-size:20px;
+}
+
+.headerTitle small{
+  opacity:.8;
+}
+
+.logoutBtn{
+  background:#FFD700;
+  color:#082a59;
+  border:none;
+  padding:9px 13px;
+  border-radius:9px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* CONTAINER */
+
+.container{
+  padding:18px;
+  max-width:1500px;
+  margin:auto;
+}
+
+/* CONTROL */
+
+.controlCard{
+  background:white;
+  padding:18px;
+  border-radius:18px;
+  box-shadow:0 8px 22px rgba(0,0,0,.08);
+  margin-bottom:18px;
+}
+
+.controls{
+  display:grid;
+  grid-template-columns:1fr 1fr auto;
+  gap:12px;
+  align-items:end;
+}
+
+.field label{
+  display:block;
+  font-size:13px;
+  font-weight:600;
+  color:#555;
+  margin-bottom:6px;
+}
+
+input,
+select{
+  width:100%;
+  padding:12px;
+  border:1px solid #d9dee7;
+  border-radius:10px;
+  outline:none;
+  font-size:14px;
+  background:white;
+}
+
+input:focus,
+select:focus{
+  border-color:#2563eb;
+}
+
+.saveBtn{
+  background:#FFD700;
+  color:#082a59;
+  border:none;
+  padding:12px 20px;
+  border-radius:10px;
+  font-weight:700;
+  cursor:pointer;
+  min-height:45px;
+}
+
+.saveBtn:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+/* MESSAGE */
+
+.message{
+  padding:12px 15px;
+  border-radius:10px;
+  margin-bottom:15px;
+  display:none;
+  font-weight:600;
+}
+
+.message.success{
+  display:block;
+  background:#dcfce7;
+  color:#166534;
+}
+
+.message.error{
+  display:block;
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+/* SUMMARY */
+
+.summary{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.summaryBox{
+  background:white;
+  padding:16px;
+  border-radius:16px;
+  text-align:center;
+  box-shadow:0 7px 18px rgba(0,0,0,.07);
+}
+
+.summaryBox p{
+  font-size:12px;
+  color:#777;
+}
+
+.summaryBox strong{
+  display:block;
+  font-size:23px;
+  margin-top:5px;
+}
+
+.blue{color:#2563eb}
+.green{color:#16a34a}
+.red{color:#dc2626}
+.orange{color:#ea580c}
+.purple{color:#7c3aed}
+
+/* SEARCH */
+
+.searchBox{
+  background:white;
+  padding:15px;
+  border-radius:16px;
+  margin-bottom:15px;
+  box-shadow:0 7px 18px rgba(0,0,0,.07);
+}
+
+/* TABLE */
+
+.tableCard{
+  background:white;
+  border-radius:18px;
+  box-shadow:0 8px 22px rgba(0,0,0,.08);
+  overflow:hidden;
+}
+
+.tableWrap{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:1200px;
+}
+
+thead th{
+  background:#0b2545;
+  color:white;
+  padding:13px;
+  text-align:left;
+  font-size:12px;
+  white-space:nowrap;
+}
+
+tbody td{
+  padding:11px;
+  border-bottom:1px solid #edf0f4;
+  font-size:12px;
+  white-space:nowrap;
+}
+
+tbody tr:hover{
+  background:#f8fafc;
+}
+
+.presentBox{
+  width:20px;
+  height:20px;
+  cursor:pointer;
+}
+
+.status{
+  font-weight:700;
+}
+
+.presentText{
+  color:#16a34a;
+}
+
+.absentText{
+  color:#dc2626;
+}
+
+.otInput{
+  width:80px;
+  padding:7px;
+}
+
+.money{
+  font-weight:700;
+}
+
+.regularPay{
+  color:#2563eb;
+}
+
+.otPay{
+  color:#ea580c;
+}
+
+.totalPay{
+  color:#7c3aed;
+  font-size:13px;
+}
+
+/* LOADING */
+
+.loading{
+  padding:30px !important;
+  text-align:center;
+  color:#777;
+}
+
+/* BOTTOM NAV */
+
+.bottomNav{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  background:white;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 0;
+  box-shadow:0 -5px 20px rgba(0,0,0,.12);
+  z-index:2000;
+}
+
+.bottomNav a{
+  text-decoration:none;
+  color:#0b2545;
+  text-align:center;
+  font-size:12px;
+  font-weight:600;
+}
+
+.bottomNav a.active{
+  color:#2563eb;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+
+  .summary{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+}
+
+@media(max-width:900px){
+
+  .controls{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .container{
+    padding:12px;
+  }
+
+  .header{
+    padding:14px;
+  }
+
+  .headerTitle h2{
+    font-size:17px;
+  }
+
+  .logoutBtn{
+    padding:8px 10px;
+    font-size:11px;
+  }
+
+  .summary{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .summaryBox strong{
+    font-size:20px;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="header">
+
+  <div class="headerLeft">
+
+    <button
+      class="backBtn"
+      onclick="location.href='owner-dashboard.html'">
+      ←
+    </button>
+
+    <div class="headerTitle">
+
+      <h2>VVS Construction</h2>
+
+      <small>
+        Attendance Management
+      </small>
+
+    </div>
+
+  </div>
+
+  <button
+    class="logoutBtn"
+    onclick="logout()">
+    Logout
+  </button>
+
+</header>
+
+
+<div class="container">
+
+<!-- CONTROLS -->
+
+<div class="controlCard">
+
+  <div class="controls">
+
+    <div class="field">
+
+      <label>Attendance Date</label>
+
+      <input
+        type="date"
+        id="attDate">
+
+    </div>
+
+
+    <div class="field">
+
+      <label>Project</label>
+
+      <select id="projectFilter">
+
+        <option value="ALL">
+          All Projects
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <button
+      class="saveBtn"
+      id="saveBtn"
+      onclick="saveAttendance()">
+
+      💾 Save Attendance
+
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- MESSAGE -->
+
+<div
+  id="message"
+  class="message">
+</div>
+
+
+<!-- SUMMARY -->
+
+<div class="summary">
+
+  <div class="summaryBox">
+    <p>Total Workers</p>
+    <strong id="totalWorkers"
+            class="blue">0</strong>
+  </div>
+
+  <div class="summaryBox">
+    <p>Present</p>
+    <strong id="totalPresent"
+            class="green">0</strong>
+  </div>
+
+  <div class="summaryBox">
+    <p>Absent</p>
+    <strong id="totalAbsent"
+            class="red">0</strong>
+  </div>
+
+  <div class="summaryBox">
+    <p>Attendance</p>
+    <strong id="attendancePercent"
+            class="orange">0%</strong>
+  </div>
+
+  <div class="summaryBox">
+    <p>OT Hours</p>
+    <strong id="totalOT"
+            class="purple">0</strong>
+  </div>
+
+  <div class="summaryBox">
+    <p>Total Pay</p>
+    <strong id="totalPay"
+            class="purple">₹0</strong>
+  </div>
+
+</div>
+
+
+<!-- SEARCH -->
+
+<div class="searchBox">
+
+  <input
+    id="search"
+    placeholder="🔍 Search worker, category or project...">
+
+</div>
+
+
+<!-- TABLE -->
+
+<div class="tableCard">
+
+<div class="tableWrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Worker</th>
+<th>Category</th>
+<th>Project</th>
+<th>Daily Wage</th>
+<th>Present</th>
+<th>Status</th>
+<th>OT Hours</th>
+<th>Regular Pay</th>
+<th>OT Pay</th>
+<th>Total Pay</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tbody">
+
+<tr>
+
+<td colspan="10"
+    class="loading">
+
+Loading workers...
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- BOTTOM NAV -->
+
+<div class="bottomNav">
+
+<a href="owner-dashboard.html">
+🏠<br>Home
+</a>
+
+<a href="workers.html">
+👷<br>Workers
+</a>
+
+<a href="attendance.html"
+   class="active">
+📅<br>Attendance
+</a>
+
+<a href="payroll.html">
+💰<br>Payroll
+</a>
+
+<a href="projects.html">
+📁<br>Projects
+</a>
+
+</div>
+
+
+<script type="module">
+
+import {
+  initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  where,
+  doc,
+  writeBatch
+}
+from
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut
+}
+from
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+
+/* =========================================
+   FIREBASE
+========================================= */
+
+const firebaseConfig={
+
+  apiKey:
+  "AIzaSyDQGsKaMXv-y7RadDHZBBHk1QDEWYuMt34",
+
+  authDomain:
+  "vvs-construction.firebaseapp.com",
+
+  projectId:
+  "vvs-construction",
+
+  storageBucket:
+  "vvs-construction.firebasestorage.app",
+
+  messagingSenderId:
+  "997782914494",
+
+  appId:
+  "1:997782914494:web:30e188d05e1607780fe5ef"
+
+};
+
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+const auth =
+getAuth(app);
+
+
+/* =========================================
+   VARIABLES
+========================================= */
+
+let workers=[];
+
+let attendanceRecords={};
+
+
+/* =========================================
+   AUTH
+========================================= */
+
+onAuthStateChanged(
+  auth,
+  user=>{
+
+    if(!user){
+
+      window.location.href=
+      "owner-login.html";
+
+      return;
+
+    }
+
+    loadWorkers();
+
+  }
+);
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+window.logout=async function(){
+
+  try{
+
+    await signOut(auth);
+
+    window.location.href=
+    "owner-login.html";
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    showMessage(
+      "Unable to logout.",
+      "error"
+    );
+
+  }
+
+};
+
+
+/* =========================================
+   LOCAL DATE
+========================================= */
+
+function getLocalDate(){
+
+  const d=new Date();
+
+  const y=d.getFullYear();
+
+  const m=String(
+    d.getMonth()+1
+  ).padStart(2,"0");
+
+  const day=String(
+    d.getDate()
+  ).padStart(2,"0");
+
+  return `${y}-${m}-${day}`;
+
+}
+
+
+document.getElementById(
+  "attDate"
+).value=getLocalDate();
+
+
+/* =========================================
+   EVENTS
+========================================= */
+
+document.getElementById(
+  "attDate"
+).addEventListener(
+  "change",
+  loadAttendanceForDate
+);
+
+document.getElementById(
+  "projectFilter"
+).addEventListener(
+  "change",
+  renderWorkers
+);
+
+document.getElementById(
+  "search"
+).addEventListener(
+  "input",
+  renderWorkers
+);
+
+
+/* =========================================
+   LOAD WORKERS
+========================================= */
+
+async function loadWorkers(){
+
+  try{
+
+    const snap=
+    await getDocs(
+      collection(
+        db,
+        "workers"
+      )
+    );
+
+    workers=[];
+
+    snap.forEach(
+      workerDoc=>{
+
+        workers.push({
+
+          id:workerDoc.id,
+
+          ...workerDoc.data()
+
+        });
+
+      }
+    );
+
+
+    workers.sort(
+      (a,b)=>
+      String(
+        a.name||""
+      ).localeCompare(
+        String(
+          b.name||""
+        )
+      )
+    );
+
+
+    populateProjects();
+
+    await loadAttendanceForDate();
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Workers error:",
+      error
+    );
+
+    showMessage(
+      "Unable to load workers.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   PROJECTS
+========================================= */
+
+function populateProjects(){
+
+  const select=
+  document.getElementById(
+    "projectFilter"
+  );
+
+  const projects=new Set();
+
+  workers.forEach(
+    worker=>{
+
+      if(worker.project){
+
+        projects.add(
+          String(
+            worker.project
+          ).trim()
+        );
+
+      }
+
+    }
+  );
+
+
+  select.innerHTML=`
+
+    <option value="ALL">
+      All Projects
+    </option>
+
+  `;
+
+
+  [...projects]
+  .filter(Boolean)
+  .sort()
+  .forEach(
+    project=>{
+
+      const option=
+      document.createElement(
+        "option"
+      );
+
+      option.value=project;
+
+      option.textContent=project;
+
+      select.appendChild(
+        option
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================
+   LOAD ATTENDANCE
+========================================= */
+
+async function loadAttendanceForDate(){
+
+  const date=
+  document.getElementById(
+    "attDate"
+  ).value;
+
+
+  if(!date){
+
+    return;
+
+  }
+
+
+  attendanceRecords={};
+
+
+  try{
+
+    const q=query(
+
+      collection(
+        db,
+        "attendance"
+      ),
+
+      where(
+        "date",
+        "==",
+        date
+      )
+
+    );
+
+
+    const snap=
+    await getDocs(q);
+
+
+    snap.forEach(
+      attendanceDoc=>{
+
+        const data=
+        attendanceDoc.data();
+
+
+        if(data.workerId){
+
+          attendanceRecords[
+            data.workerId
+          ]={
+
+            status:
+            data.status==="Present"
+              ? "Present"
+              : "Absent",
+
+            otHours:
+            Number(
+              data.otHours||0
+            )
+
+          };
+
+        }
+
+      }
+    );
+
+
+    renderWorkers();
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    showMessage(
+      "Unable to load attendance.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   FILTER
+========================================= */
+
+function getFilteredWorkers(){
+
+  const search=
+  document.getElementById(
+    "search"
+  ).value
+  .trim()
+  .toLowerCase();
+
+
+  const project=
+  document.getElementById(
+    "projectFilter"
+  ).value;
+
+
+  return workers.filter(
+    worker=>{
+
+      const text=
+      [
+        worker.name,
+        worker.category,
+        worker.project
+      ]
+      .join(" ")
+      .toLowerCase();
+
+
+      const searchOK=
+      !search ||
+      text.includes(search);
+
+
+      const projectOK=
+      project==="ALL" ||
+      String(
+        worker.project||""
+      )===project;
+
+
+      return searchOK&&projectOK;
+
+    }
+  );
+
+}
+
+
+/* =========================================
+   RENDER
+========================================= */
+
+function renderWorkers(){
+
+  const tbody=
+  document.getElementById(
+    "tbody"
+  );
+
+
+  const filtered=
+  getFilteredWorkers();
+
+
+  tbody.innerHTML="";
+
+
+  if(filtered.length===0){
+
+    tbody.innerHTML=`
+
+      <tr>
+
+        <td colspan="10"
+            class="loading">
+
+          No workers found.
+
+        </td>
+
+      </tr>
+
+    `;
+
+    updateSummary();
+
+    return;
+
+  }
+
+
+  filtered.forEach(
+    worker=>{
+
+      const index=
+      workers.indexOf(
+        worker
+      );
+
+
+      const record=
+      attendanceRecords[
+        worker.id
+      ]||{
+
+        status:"Absent",
+        otHours:0
+
+      };
+
+
+      const present=
+      record.status==="Present";
+
+
+      const wage=
+      Number(
+        worker.dailyWage||0
+      );
+
+
+      const otHours=
+      Math.max(
+        0,
+        Math.min(
+          24,
+          Number(
+            record.otHours||0
+          )
+        )
+      );
+
+
+      const otRate=
+      wage/8;
+
+
+      const regularPay=
+      present?wage:0;
+
+
+      const otPay=
+      present
+        ? otHours*otRate
+        : 0;
+
+
+      const total=
+      regularPay+otPay;
+
+
+      tbody.innerHTML+=`
+
+      <tr>
+
+        <td>
+
+          <b>
+            ${escapeHTML(
+              worker.name||
+              "Unnamed Worker"
+            )}
+          </b>
+
+        </td>
+
+
+        <td>
+
+          ${escapeHTML(
+            worker.category||
+            "-"
+          )}
+
+        </td>
+
+
+        <td>
+
+          ${escapeHTML(
+            worker.project||
+            "-"
+          )}
+
+        </td>
+
+
+        <td class="money">
+
+          ₹${wage.toLocaleString(
+            "en-IN"
+          )}
+
+        </td>
+
+
+        <td>
+
+          <input
+
+            type="checkbox"
+
+            class="presentBox"
+
+            data-index="${index}"
+
+            ${present
+              ?"checked"
+              :""}
+
+          >
+
+        </td>
+
+
+        <td>
+
+          <span
+
+            class="status ${
+              present
+                ?"presentText"
+                :"absentText"
+            }"
+
+            id="status-${index}">
+
+            ${present
+              ?"Present"
+              :"Absent"}
+
+          </span>
+
+        </td>
+
+
+        <td>
+
+          <input
+
+            type="number"
+
+            class="otInput"
+
+            data-index="${index}"
+
+            value="${otHours}"
+
+            min="0"
+
+            max="24"
+
+            step="0.5"
+
+          >
+
+        </td>
+
+
+        <td
+          class="money regularPay"
+          id="regular-${index}">
+
+          ₹${regularPay.toLocaleString(
+            "en-IN"
+          )}
+
+        </td>
+
+
+        <td
+          class="money otPay"
+          id="ot-${index}">
+
+          ₹${otPay.toLocaleString(
+            "en-IN",
+            {
+              maximumFractionDigits:2
+            }
+          )}
+
+        </td>
+
+
+        <td
+          class="money totalPay"
+          id="total-${index}">
+
+          ₹${total.toLocaleString(
+            "en-IN",
+            {
+              maximumFractionDigits:2
+            }
+          )}
+
+        </td>
+
+      </tr>
+
+      `;
+
+    }
+  );
+
+
+  attachEvents();
+
+  updateSummary();
+
+}
+
+
+/* =========================================
+   ROW EVENTS
+========================================= */
+
+function attachEvents(){
+
+  document
+  .querySelectorAll(
+    ".presentBox"
+  )
+  .forEach(
+    checkbox=>{
+
+      checkbox.addEventListener(
+        "change",
+        ()=>{
+
+          updateRow(
+            Number(
+              checkbox.dataset.index
+            )
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+  document
+  .querySelectorAll(
+    ".otInput"
+  )
+  .forEach(
+    input=>{
+
+      input.addEventListener(
+        "input",
+        ()=>{
+
+          updateRow(
+            Number(
+              input.dataset.index
+            )
+          );
+
+        }
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================
+   UPDATE ROW
+========================================= */
+
+function updateRow(index){
+
+  const checkbox=
+  document.querySelector(
+    `.presentBox[data-index="${index}"]`
+  );
+
+
+  const otInput=
+  document.querySelector(
+    `.otInput[data-index="${index}"]`
+  );
+
+
+  if(!checkbox||!otInput){
+
+    return;
+
+  }
+
+
+  const worker=
+  workers[index];
+
+
+  const present=
+  checkbox.checked;
+
+
+  let otHours=
+  Number(
+    otInput.value||0
+  );
+
+
+  otHours=
+  Math.max(
+    0,
+    Math.min(
+      24,
+      otHours
+    )
+  );
+
+
+  otInput.value=otHours;
+
+
+  const wage=
+  Number(
+    worker.dailyWage||0
+  );
+
+
+  const regularPay=
+  present?wage:0;
+
+
+  const otPay=
+  present
+    ?otHours*(wage/8)
+    :0;
+
+
+  const total=
+  regularPay+otPay;
+
+
+  const status=
+  document.getElementById(
+    `status-${index}`
+  );
+
+
+  status.textContent=
+  present
+    ?"Present"
+    :"Absent";
+
+
+  status.className=
+  "status "+
+  (
+    present
+      ?"presentText"
+      :"absentText"
+  );
+
+
+  document.getElementById(
+    `regular-${index}`
+  ).textContent=
+  "₹"+
+  regularPay.toLocaleString(
+    "en-IN"
+  );
+
+
+  document.getElementById(
+    `ot-${index}`
+  ).textContent=
+  "₹"+
+  otPay.toLocaleString(
+    "en-IN",
+    {
+      maximumFractionDigits:2
+    }
+  );
+
+
+  document.getElementById(
+    `total-${index}`
+  ).textContent=
+  "₹"+
+  total.toLocaleString(
+    "en-IN",
+    {
+      maximumFractionDigits:2
+    }
+  );
+
+
+  updateSummary();
+
+}
+
+
+/* =========================================
+   SUMMARY
+========================================= */
+
+function updateSummary(){
+
+  const filtered=
+  getFilteredWorkers();
+
+
+  let present=0;
+
+  let ot=0;
+
+  let pay=0;
+
+
+  filtered.forEach(
+    worker=>{
+
+      const index=
+      workers.indexOf(
+        worker
+      );
+
+
+      const checkbox=
+      document.querySelector(
+        `.presentBox[data-index="${index}"]`
+      );
+
+
+      const otInput=
+      document.querySelector(
+        `.otInput[data-index="${index}"]`
+      );
+
+
+      if(!checkbox||!otInput){
+
+        return;
+
+      }
+
+
+      const isPresent=
+      checkbox.checked;
+
+
+      const hours=
+      Number(
+        otInput.value||0
+      );
+
+
+      const wage=
+      Number(
+        worker.dailyWage||0
+      );
+
+
+      if(isPresent){
+
+        present++;
+
+        pay+=
+        wage+
+        (
+          hours*
+          wage/8
+        );
+
+      }
+
+
+      ot+=hours;
+
+    }
+  );
+
+
+  const total=
+  filtered.length;
+
+
+  const absent=
+  Math.max(
+    0,
+    total-present
+  );
+
+
+  const percent=
+  total
+    ?(present/total*100)
+      .toFixed(1)
+    :"0";
+
+
+  document.getElementById(
+    "totalWorkers"
+  ).textContent=total;
+
+
+  document.getElementById(
+    "totalPresent"
+  ).textContent=present;
+
+
+  document.getElementById(
+    "totalAbsent"
+  ).textContent=absent;
+
+
+  document.getElementById(
+    "attendancePercent"
+  ).textContent=
+  percent+"%";
+
+
+  document.getElementById(
+    "totalOT"
+  ).textContent=
+  ot.toFixed(1);
+
+
+  document.getElementById(
+    "totalPay"
+  ).textContent=
+  "₹"+
+  pay.toLocaleString(
+    "en-IN",
+    {
+      maximumFractionDigits:2
+    }
+  );
+
+}
+
+
+/* =========================================
+   SAVE ATTENDANCE
+========================================= */
+
+window.saveAttendance=
+async function(){
+
+  const date=
+  document.getElementById(
+    "attDate"
+  ).value;
+
+
+  if(!date){
+
+    showMessage(
+      "Please select an attendance date.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(workers.length===0){
+
+    showMessage(
+      "No workers available.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const visibleWorkers=
+  getFilteredWorkers();
+
+
+  if(visibleWorkers.length===0){
+
+    showMessage(
+      "No workers selected.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const saveBtn=
+  document.getElementById(
+    "saveBtn"
+  );
+
+
+  saveBtn.disabled=true;
+
+  saveBtn.textContent=
+  "Saving...";
+
+
+  try{
+
+    /*
+      Firestore batch limit:
+      maximum 500 writes.
+
+      We use batches of 450
+      for safety.
+    */
+
+    let batch=
+    writeBatch(db);
+
+    let batchCount=0;
+
+    let totalSaved=0;
+
+
+    async function commitBatch(){
+
+      if(batchCount===0){
+
+        return;
+
+      }
+
+      await batch.commit();
+
+      batch=
+      writeBatch(db);
+
+      batchCount=0;
+
+    }
+
+
+    for(
+      const worker of visibleWorkers
+    ){
+
+      const index=
+      workers.indexOf(
+        worker
+      );
+
+
+      const checkbox=
+      document.querySelector(
+        `.presentBox[data-index="${index}"]`
+      );
+
+
+      const otInput=
+      document.querySelector(
+        `.otInput[data-index="${index}"]`
+      );
+
+
+      if(!checkbox||!otInput){
+
+        continue;
+
+      }
+
+
+      const present=
+      checkbox.checked;
+
+
+      const otHours=
+      Math.max(
+        0,
+        Math.min(
+          24,
+          Number(
+            otInput.value||0
+          )
+        )
+      );
+
+
+      const wage=
+      Number(
+        worker.dailyWage||0
+      );
+
+
+      const regularPay=
+      present?wage:0;
+
+
+      const otPay=
+      present
+        ?otHours*(wage/8)
+        :0;
+
+
+      const totalPay=
+      regularPay+otPay;
+
+
+      /*
+        One deterministic document
+        per worker per date.
+      */
+
+      const attendanceId=
+      `${date}_${worker.id}`;
+
+
+      const ref=
+      doc(
+        db,
+        "attendance",
+        attendanceId
+      );
+
+
+      batch.set(
+        ref,
+        {
+
+          date:date,
+
+          workerId:
+          worker.id,
+
+          workerName:
+          worker.name||"",
+
+          category:
+          worker.category||"",
+
+          project:
+          worker.project||"",
+
+          dailyWage:
+          wage,
+
+          status:
+          present
+            ?"Present"
+            :"Absent",
+
+          otHours:
+          otHours,
+
+          otRate:
+          Number(
+            (wage/8).toFixed(2)
+          ),
+
+          regularPay:
+          Number(
+            regularPay.toFixed(2)
+          ),
+
+          otPay:
+          Number(
+            otPay.toFixed(2)
+          ),
+
+          totalPay:
+          Number(
+            totalPay.toFixed(2)
+          ),
+
+          updatedAt:
+          new Date().toISOString()
+
+        },
+
+        {
+          merge:true
+        }
+
+      );
+
+
+      batchCount++;
+
+      totalSaved++;
+
+
+      if(batchCount>=450){
+
+        await commitBatch();
+
+      }
+
+    }
+
+
+    await commitBatch();
+
+
+    showMessage(
+      `✅ ${totalSaved} attendance records saved successfully.`,
+      "success"
+    );
+
+
+    await loadAttendanceForDate();
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Save error:",
+      error
+    );
+
+
+    showMessage(
+      "Unable to save attendance: "+
+      error.message,
+      "error"
+    );
+
+  }
+
+  finally{
+
+    saveBtn.disabled=false;
+
+    saveBtn.textContent=
+    "💾 Save Attendance";
+
+  }
+
+};
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+function showMessage(
+  text,
+  type
+){
+
+  const message=
+  document.getElementById(
+    "message"
+  );
+
+
+  message.textContent=text;
+
+  message.className=
+  "message "+
+  type;
+
+
+  setTimeout(
+    ()=>{
+
+      message.className=
+      "message";
+
+    },
+    4000
+  );
+
+}
+
+
+/* =========================================
+   HTML SAFETY
+========================================= */
+
+function escapeHTML(value){
+
+  return String(value)
+
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+</script>
+
+</body>
+</html>
