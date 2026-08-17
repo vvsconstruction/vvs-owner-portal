@@ -1,0 +1,2163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>VVS Construction | Payroll</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<style>
+
+/* =========================
+   GLOBAL
+========================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:#eef4fb;
+color:#222;
+padding-bottom:90px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+background:linear-gradient(
+135deg,
+#082a59,
+#114d9a
+);
+
+color:white;
+
+padding:22px 18px 28px;
+
+border-bottom-left-radius:30px;
+border-bottom-right-radius:30px;
+
+box-shadow:
+0 8px 30px rgba(0,0,0,.20);
+}
+
+.top{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+}
+
+.leftHeader{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.backBtn{
+width:44px;
+height:44px;
+
+border:none;
+border-radius:12px;
+
+background:rgba(255,255,255,.15);
+
+color:white;
+
+font-size:23px;
+
+cursor:pointer;
+
+transition:.25s;
+}
+
+.backBtn:hover{
+background:rgba(255,255,255,.25);
+transform:translateX(-2px);
+}
+
+.logo h2{
+font-size:20px;
+}
+
+.logo small{
+font-size:11px;
+opacity:.8;
+}
+
+.moneyIcon{
+width:46px;
+height:46px;
+
+border-radius:14px;
+
+background:#FFD700;
+
+color:#082a59;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:23px;
+
+font-weight:700;
+}
+
+.headerTitle{
+margin-top:20px;
+}
+
+.headerTitle h1{
+font-size:27px;
+}
+
+.headerTitle p{
+margin-top:5px;
+opacity:.85;
+font-size:13px;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+padding:18px;
+max-width:1400px;
+margin:auto;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+background:white;
+
+padding:18px;
+
+border-radius:18px;
+
+box-shadow:
+0 8px 20px rgba(0,0,0,.08);
+
+margin-bottom:20px;
+}
+
+.card h3{
+color:#082a59;
+margin-bottom:16px;
+}
+
+/* =========================
+   PERIOD
+========================= */
+
+.controls{
+display:grid;
+grid-template-columns:
+repeat(3,1fr);
+
+gap:14px;
+}
+
+.field label{
+display:block;
+
+font-size:12px;
+
+font-weight:600;
+
+color:#555;
+
+margin-bottom:6px;
+}
+
+input{
+width:100%;
+
+padding:13px;
+
+border:1px solid #dce2ea;
+
+border-radius:12px;
+
+font-size:14px;
+
+outline:none;
+
+background:white;
+}
+
+input:focus{
+border-color:#2563eb;
+
+box-shadow:
+0 0 0 3px
+rgba(37,99,235,.10);
+}
+
+.generateBtn{
+width:100%;
+
+margin-top:18px;
+
+padding:14px;
+
+border:none;
+
+border-radius:12px;
+
+background:#0b2545;
+
+color:white;
+
+font-size:15px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.25s;
+}
+
+.generateBtn:hover{
+background:#114d9a;
+
+transform:translateY(-2px);
+}
+
+.generateBtn:disabled{
+opacity:.6;
+cursor:not-allowed;
+}
+
+/* =========================
+   SUMMARY
+========================= */
+
+.summary{
+display:grid;
+
+grid-template-columns:
+repeat(4,1fr);
+
+gap:14px;
+}
+
+.summaryBox{
+padding:18px;
+
+border-radius:16px;
+
+background:#f8fafc;
+
+border:1px solid #edf0f4;
+
+text-align:center;
+}
+
+.summaryIcon{
+font-size:25px;
+margin-bottom:5px;
+}
+
+.summaryBox small{
+display:block;
+
+color:#777;
+
+font-size:11px;
+}
+
+.summaryBox strong{
+display:block;
+
+font-size:25px;
+
+margin-top:5px;
+}
+
+.blue{
+color:#2563eb;
+}
+
+.green{
+color:#16a34a;
+}
+
+.orange{
+color:#ea580c;
+}
+
+.purple{
+color:#7c3aed;
+}
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message{
+display:none;
+
+margin-top:15px;
+
+padding:12px;
+
+border-radius:10px;
+
+font-size:13px;
+
+font-weight:600;
+}
+
+.message.show{
+display:block;
+}
+
+.success{
+background:#dcfce7;
+color:#166534;
+}
+
+.error{
+background:#fee2e2;
+color:#991b1b;
+}
+
+/* =========================
+   ACTION BAR
+========================= */
+
+.actionBar{
+display:flex;
+
+gap:10px;
+
+margin-bottom:15px;
+}
+
+.searchBox{
+flex:1;
+}
+
+.actionBtn{
+padding:12px 16px;
+
+border:none;
+
+border-radius:11px;
+
+background:#FFD700;
+
+color:#082a59;
+
+font-weight:700;
+
+cursor:pointer;
+
+white-space:nowrap;
+
+transition:.25s;
+}
+
+.actionBtn:hover{
+transform:translateY(-2px);
+}
+
+.printBtn{
+background:#0b2545;
+color:white;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.tableWrap{
+overflow-x:auto;
+}
+
+table{
+width:100%;
+
+border-collapse:collapse;
+
+min-width:850px;
+}
+
+th{
+background:#0b2545;
+
+color:white;
+
+padding:14px;
+
+font-size:12px;
+
+text-align:left;
+
+white-space:nowrap;
+}
+
+td{
+padding:13px;
+
+font-size:13px;
+
+border-bottom:
+1px solid #edf0f4;
+}
+
+tr:hover{
+background:#f8fafc;
+}
+
+.present{
+color:#16a34a;
+
+font-weight:700;
+}
+
+.totalPay{
+color:#7c3aed;
+
+font-weight:700;
+}
+
+/* =========================
+   MOBILE PAYROLL
+========================= */
+
+.mobilePayroll{
+display:none;
+}
+
+.payrollWorker{
+background:#f8fafc;
+
+border:1px solid #e5e7eb;
+
+border-radius:16px;
+
+padding:15px;
+
+margin-bottom:12px;
+}
+
+.workerTop{
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+gap:10px;
+
+margin-bottom:14px;
+}
+
+.workerName{
+font-size:16px;
+
+font-weight:700;
+
+color:#082a59;
+}
+
+.workerCategory{
+font-size:11px;
+
+color:#777;
+
+margin-top:2px;
+}
+
+.workerTotal{
+font-size:19px;
+
+font-weight:700;
+
+color:#7c3aed;
+
+white-space:nowrap;
+}
+
+.payGrid{
+display:grid;
+
+grid-template-columns:
+repeat(2,1fr);
+
+gap:9px;
+}
+
+.payItem{
+background:white;
+
+padding:10px;
+
+border-radius:10px;
+
+border:1px solid #edf0f4;
+}
+
+.payItem small{
+display:block;
+
+font-size:10px;
+
+color:#777;
+}
+
+.payItem strong{
+display:block;
+
+font-size:13px;
+
+margin-top:3px;
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+text-align:center;
+
+padding:30px 10px;
+
+color:#777;
+
+font-size:14px;
+}
+
+/* =========================
+   BOTTOM NAV
+========================= */
+
+.bottomNav{
+position:fixed;
+
+left:0;
+right:0;
+bottom:0;
+
+height:70px;
+
+background:white;
+
+display:flex;
+
+justify-content:space-around;
+
+align-items:center;
+
+box-shadow:
+0 -6px 20px rgba(0,0,0,.12);
+
+z-index:2000;
+}
+
+.bottomNav a{
+flex:1;
+
+text-decoration:none;
+
+color:#082a59;
+
+font-size:11px;
+
+font-weight:600;
+
+text-align:center;
+
+line-height:18px;
+}
+
+.bottomNav a.active{
+color:#2563eb;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+.controls{
+grid-template-columns:
+repeat(2,1fr);
+}
+
+.summary{
+grid-template-columns:
+repeat(2,1fr);
+}
+
+}
+
+@media(max-width:700px){
+
+body{
+padding-bottom:80px;
+}
+
+.header{
+padding:
+18px 16px 25px;
+}
+
+.headerTitle h1{
+font-size:23px;
+}
+
+.container{
+padding:14px;
+}
+
+.controls{
+grid-template-columns:1fr;
+}
+
+.summary{
+grid-template-columns:
+repeat(2,1fr);
+}
+
+.summaryBox{
+padding:14px 7px;
+}
+
+.summaryBox strong{
+font-size:20px;
+}
+
+.actionBar{
+flex-direction:column;
+}
+
+.actionBtn{
+width:100%;
+}
+
+.desktopPayroll{
+display:none;
+}
+
+.mobilePayroll{
+display:block;
+}
+
+}
+
+@media(max-width:380px){
+
+.summaryBox strong{
+font-size:18px;
+}
+
+.workerTotal{
+font-size:16px;
+}
+
+.payGrid{
+gap:6px;
+}
+
+}
+
+/* =========================
+   PRINT
+========================= */
+
+@media print{
+
+body{
+background:white;
+padding:0;
+}
+
+.header,
+.controls,
+.generateBtn,
+.actionBar,
+.bottomNav,
+.message{
+display:none!important;
+}
+
+.container{
+padding:0;
+}
+
+.card{
+box-shadow:none;
+
+border:1px solid #ddd;
+}
+
+.mobilePayroll{
+display:none!important;
+}
+
+.desktopPayroll{
+display:block!important;
+}
+
+table{
+min-width:100%;
+}
+
+th{
+background:#ddd!important;
+color:#000!important;
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<div class="header">
+
+<div class="top">
+
+<div class="leftHeader">
+
+<button
+class="backBtn"
+onclick="location.href='owner-dashboard.html'">
+
+←
+
+</button>
+
+<div class="logo">
+
+<h2>VVS Construction</h2>
+
+<small>Owner Management System</small>
+
+</div>
+
+</div>
+
+<div class="moneyIcon">
+
+₹
+
+</div>
+
+</div>
+
+
+<div class="headerTitle">
+
+<h1>💰 Payroll</h1>
+
+<p>Manage worker salaries, attendance and overtime</p>
+
+</div>
+
+</div>
+
+
+<div class="container">
+
+
+<!-- =========================
+     PAYROLL PERIOD
+========================= -->
+
+<div class="card">
+
+<h3>📅 Payroll Period</h3>
+
+<div class="controls">
+
+
+<div class="field">
+
+<label>
+From Date
+</label>
+
+<input
+type="date"
+id="fromDate"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+To Date
+</label>
+
+<input
+type="date"
+id="toDate"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+OT Rate / Hour (₹)
+</label>
+
+<input
+type="number"
+id="otRate"
+value="100"
+min="0"
+step="10"
+>
+
+</div>
+
+</div>
+
+
+<button
+class="generateBtn"
+id="generateBtn"
+onclick="generatePayroll()"
+>
+
+💰 Generate Payroll
+
+</button>
+
+
+<div
+id="message"
+class="message">
+</div>
+
+</div>
+
+
+<!-- =========================
+     SUMMARY
+========================= -->
+
+<div class="card">
+
+<h3>📊 Payroll Summary</h3>
+
+<div class="summary">
+
+
+<div class="summaryBox">
+
+<div class="summaryIcon">
+👷
+</div>
+
+<small>
+Workers
+</small>
+
+<strong
+id="workerCount"
+class="blue">
+
+0
+
+</strong>
+
+</div>
+
+
+<div class="summaryBox">
+
+<div class="summaryIcon">
+✅
+</div>
+
+<small>
+Present Days
+</small>
+
+<strong
+id="presentDays"
+class="green">
+
+0
+
+</strong>
+
+</div>
+
+
+<div class="summaryBox">
+
+<div class="summaryIcon">
+⏱️
+</div>
+
+<small>
+OT Hours
+</small>
+
+<strong
+id="otTotal"
+class="orange">
+
+0
+
+</strong>
+
+</div>
+
+
+<div class="summaryBox">
+
+<div class="summaryIcon">
+💰
+</div>
+
+<small>
+Total Payroll
+</small>
+
+<strong
+id="grandTotal"
+class="purple">
+
+₹0
+
+</strong>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     PAYROLL RECORDS
+========================= -->
+
+<div class="card">
+
+<h3>
+💳 Worker Payroll
+</h3>
+
+
+<div class="actionBar">
+
+<input
+class="searchBox"
+id="search"
+placeholder="🔍 Search worker..."
+>
+
+<button
+class="actionBtn"
+onclick="exportCSV()"
+>
+
+📥 CSV
+
+</button>
+
+
+<button
+class="actionBtn printBtn"
+onclick="window.print()"
+>
+
+🖨️ Print
+
+</button>
+
+</div>
+
+
+<!-- DESKTOP -->
+
+<div class="desktopPayroll">
+
+<div class="tableWrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+Worker
+</th>
+
+<th>
+Category
+</th>
+
+<th>
+Daily Wage
+</th>
+
+<th>
+Present Days
+</th>
+
+<th>
+OT Hours
+</th>
+
+<th>
+Basic Pay
+</th>
+
+<th>
+OT Pay
+</th>
+
+<th>
+Total Pay
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="payrollTable">
+
+<tr>
+
+<td
+colspan="8"
+class="empty">
+
+Select dates and generate payroll.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<!-- MOBILE -->
+
+<div
+class="mobilePayroll"
+id="mobilePayroll">
+
+<div class="empty">
+
+Select dates and generate payroll.
+
+</div>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<!-- =========================
+     BOTTOM NAV
+========================= -->
+
+<div class="bottomNav">
+
+<a href="owner-dashboard.html">
+
+🏠
+<br>
+Home
+
+</a>
+
+
+<a href="workers.html">
+
+👷
+<br>
+Workers
+
+</a>
+
+
+<a href="attendance.html">
+
+📅
+<br>
+Attendance
+
+</a>
+
+
+<a class="active">
+
+💰
+<br>
+Payroll
+
+</a>
+
+
+<a href="projects.html">
+
+📁
+<br>
+Projects
+
+</a>
+
+</div>
+
+
+<script type="module">
+
+
+/* ============================================
+   FIREBASE
+============================================ */
+
+import {
+initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+
+import {
+getFirestore,
+collection,
+getDocs,
+doc,
+setDoc
+}
+from
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+import {
+getAuth,
+onAuthStateChanged
+}
+from
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+
+const firebaseConfig={
+
+apiKey:
+"AIzaSyDQGsKaMXv-y7RadDHZBBHk1QDEWYuMt34",
+
+authDomain:
+"vvs-construction.firebaseapp.com",
+
+projectId:
+"vvs-construction",
+
+storageBucket:
+"vvs-construction.firebasestorage.app",
+
+messagingSenderId:
+"997782914494",
+
+appId:
+"1:997782914494:web:30e188d05e1607780fe5ef"
+
+};
+
+
+const app=
+initializeApp(firebaseConfig);
+
+const db=
+getFirestore(app);
+
+const auth=
+getAuth(app);
+
+
+/* ============================================
+   AUTH
+============================================ */
+
+onAuthStateChanged(
+auth,
+(user)=>{
+
+if(!user){
+
+window.location.href=
+"owner-login.html";
+
+}
+
+});
+
+
+/* ============================================
+   VARIABLES
+============================================ */
+
+let payrollData=[];
+
+
+/* ============================================
+   LOCAL DATE
+============================================ */
+
+function localDate(){
+
+const d=new Date();
+
+const y=d.getFullYear();
+
+const m=String(
+d.getMonth()+1
+).padStart(2,"0");
+
+const day=String(
+d.getDate()
+).padStart(2,"0");
+
+return `${y}-${m}-${day}`;
+
+}
+
+
+const today=localDate();
+
+document.getElementById(
+"fromDate"
+).value=today;
+
+document.getElementById(
+"toDate"
+).value=today;
+
+
+/* ============================================
+   GENERATE PAYROLL
+============================================ */
+
+window.generatePayroll=
+async function(){
+
+const from=
+document.getElementById(
+"fromDate"
+).value;
+
+const to=
+document.getElementById(
+"toDate"
+).value;
+
+const otRate=
+Number(
+document.getElementById(
+"otRate"
+).value||0
+);
+
+
+if(!from||!to){
+
+showMessage(
+"Please select payroll dates.",
+"error"
+);
+
+return;
+
+}
+
+
+if(from>to){
+
+showMessage(
+"From Date cannot be after To Date.",
+"error"
+);
+
+return;
+
+}
+
+
+const button=
+document.getElementById(
+"generateBtn"
+);
+
+button.disabled=true;
+
+button.textContent=
+"Generating...";
+
+
+try{
+
+
+/* =========================
+   WORKERS
+========================= */
+
+const workerSnap=
+await getDocs(
+collection(
+db,
+"workers"
+)
+);
+
+
+/* =========================
+   ATTENDANCE
+========================= */
+
+const attendanceSnap=
+await getDocs(
+collection(
+db,
+"attendance"
+)
+);
+
+
+const attendanceMap={};
+
+
+attendanceSnap.forEach(
+attendanceDoc=>{
+
+const d=
+attendanceDoc.data();
+
+
+if(
+d.date>=from &&
+d.date<=to &&
+d.workerId
+){
+
+if(
+!attendanceMap[d.workerId]
+){
+
+attendanceMap[
+d.workerId
+]=[];
+
+}
+
+
+attendanceMap[
+d.workerId
+].push(d);
+
+}
+
+});
+
+
+/* =========================
+   RESET
+========================= */
+
+payrollData=[];
+
+let totalPresentDays=0;
+
+let totalOT=0;
+
+let grandTotal=0;
+
+
+/* =========================
+   CALCULATE
+========================= */
+
+workerSnap.docs.forEach(
+workerDoc=>{
+
+const worker=
+workerDoc.data();
+
+const workerId=
+workerDoc.id;
+
+
+const dailyWage=
+Number(
+worker.dailyWage||0
+);
+
+
+const records=
+attendanceMap[
+workerId
+]||[];
+
+
+let presentDays=0;
+
+let otHours=0;
+
+
+records.forEach(
+record=>{
+
+if(
+record.status===
+"Present"
+){
+
+presentDays++;
+
+otHours+=
+Number(
+record.otHours||0
+);
+
+}
+
+});
+
+
+const basicPay=
+presentDays*
+dailyWage;
+
+const otPay=
+otHours*
+otRate;
+
+const totalPay=
+basicPay+
+otPay;
+
+
+payrollData.push({
+
+workerId,
+
+workerName:
+worker.name||"-",
+
+category:
+worker.category||"-",
+
+dailyWage,
+
+presentDays,
+
+otHours,
+
+basicPay,
+
+otPay,
+
+totalPay
+
+});
+
+
+totalPresentDays+=
+presentDays;
+
+totalOT+=
+otHours;
+
+grandTotal+=
+totalPay;
+
+});
+
+
+/* =========================
+   RENDER
+========================= */
+
+renderDesktop();
+
+renderMobile();
+
+
+/* =========================
+   SUMMARY
+========================= */
+
+document.getElementById(
+"workerCount"
+).textContent=
+payrollData.length;
+
+
+document.getElementById(
+"presentDays"
+).textContent=
+totalPresentDays;
+
+
+document.getElementById(
+"otTotal"
+).textContent=
+totalOT;
+
+
+document.getElementById(
+"grandTotal"
+).textContent=
+"₹"+
+grandTotal.toLocaleString(
+"en-IN"
+);
+
+
+/* =========================
+   SAVE FIRESTORE
+========================= */
+
+for(
+const item of payrollData
+){
+
+const payrollId=
+`${from}_${to}_${item.workerId}`;
+
+
+await setDoc(
+
+doc(
+db,
+"payroll",
+payrollId
+),
+
+{
+
+workerId:
+item.workerId,
+
+workerName:
+item.workerName,
+
+category:
+item.category,
+
+dailyWage:
+item.dailyWage,
+
+presentDays:
+item.presentDays,
+
+otHours:
+item.otHours,
+
+otRate,
+
+basicPay:
+item.basicPay,
+
+otPay:
+item.otPay,
+
+totalPay:
+item.totalPay,
+
+amount:
+item.totalPay,
+
+fromDate:
+from,
+
+toDate:
+to,
+
+generatedAt:
+new Date().toISOString()
+
+},
+
+{
+merge:true
+}
+
+);
+
+}
+
+
+showMessage(
+"✅ Payroll generated and saved successfully.",
+"success"
+);
+
+
+}catch(error){
+
+console.error(
+"Payroll error:",
+error
+);
+
+showMessage(
+"Unable to generate payroll. Check Firebase permissions.",
+"error"
+);
+
+}
+
+
+button.disabled=false;
+
+button.textContent=
+"💰 Generate Payroll";
+
+};
+
+
+/* ============================================
+   DESKTOP
+============================================ */
+
+function renderDesktop(
+data=payrollData
+){
+
+const tbody=
+document.getElementById(
+"payrollTable"
+);
+
+
+if(!data.length){
+
+tbody.innerHTML=`
+
+<tr>
+
+<td
+colspan="8"
+class="empty">
+
+No workers found.
+
+</td>
+
+</tr>
+
+`;
+
+return;
+
+}
+
+
+tbody.innerHTML=
+data.map(
+item=>`
+
+<tr>
+
+<td>
+
+<b>
+${escapeHTML(
+item.workerName
+)}
+</b>
+
+</td>
+
+<td>
+${escapeHTML(
+item.category
+)}
+</td>
+
+<td>
+₹${formatMoney(
+item.dailyWage
+)}
+</td>
+
+<td class="present">
+${item.presentDays}
+</td>
+
+<td>
+${item.otHours}
+</td>
+
+<td>
+₹${formatMoney(
+item.basicPay
+)}
+</td>
+
+<td>
+₹${formatMoney(
+item.otPay
+)}
+</td>
+
+<td class="totalPay">
+₹${formatMoney(
+item.totalPay
+)}
+</td>
+
+</tr>
+
+`
+).join("");
+
+}
+
+
+/* ============================================
+   MOBILE
+============================================ */
+
+function renderMobile(
+data=payrollData
+){
+
+const container=
+document.getElementById(
+"mobilePayroll"
+);
+
+
+if(!data.length){
+
+container.innerHTML=`
+
+<div class="empty">
+
+No workers found.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+container.innerHTML=
+data.map(
+item=>`
+
+<div class="payrollWorker">
+
+<div class="workerTop">
+
+<div>
+
+<div class="workerName">
+
+${escapeHTML(
+item.workerName
+)}
+
+</div>
+
+<div class="workerCategory">
+
+${escapeHTML(
+item.category
+)}
+
+</div>
+
+</div>
+
+<div class="workerTotal">
+
+₹${formatMoney(
+item.totalPay
+)}
+
+</div>
+
+</div>
+
+
+<div class="payGrid">
+
+
+<div class="payItem">
+
+<small>
+Daily Wage
+</small>
+
+<strong>
+₹${formatMoney(
+item.dailyWage
+)}
+</strong>
+
+</div>
+
+
+<div class="payItem">
+
+<small>
+Present Days
+</small>
+
+<strong class="present">
+
+${item.presentDays} days
+
+</strong>
+
+</div>
+
+
+<div class="payItem">
+
+<small>
+OT Hours
+</small>
+
+<strong>
+
+${item.otHours} hrs
+
+</strong>
+
+</div>
+
+
+<div class="payItem">
+
+<small>
+Basic Pay
+</small>
+
+<strong>
+
+₹${formatMoney(
+item.basicPay
+)}
+
+</strong>
+
+</div>
+
+
+<div class="payItem">
+
+<small>
+OT Pay
+</small>
+
+<strong>
+
+₹${formatMoney(
+item.otPay
+)}
+
+</strong>
+
+</div>
+
+
+<div class="payItem">
+
+<small>
+Total Pay
+</small>
+
+<strong class="totalPay">
+
+₹${formatMoney(
+item.totalPay
+)}
+
+</strong>
+
+</div>
+
+
+</div>
+
+</div>
+
+`
+).join("");
+
+}
+
+
+/* ============================================
+   SEARCH
+============================================ */
+
+document.getElementById(
+"search"
+).addEventListener(
+"input",
+function(){
+
+const value=
+this.value
+.toLowerCase()
+.trim();
+
+
+const filtered=
+payrollData.filter(
+item=>
+
+item.workerName
+.toLowerCase()
+.includes(value)
+
+);
+
+
+renderDesktop(
+filtered
+);
+
+renderMobile(
+filtered
+);
+
+});
+
+
+/* ============================================
+   CSV
+============================================ */
+
+window.exportCSV=
+function(){
+
+if(!payrollData.length){
+
+showMessage(
+"Generate payroll first.",
+"error"
+);
+
+return;
+
+}
+
+
+const from=
+document.getElementById(
+"fromDate"
+).value;
+
+const to=
+document.getElementById(
+"toDate"
+).value;
+
+
+let csv=
+"Worker,Category,Daily Wage,Present Days,OT Hours,Basic Pay,OT Pay,Total Pay\n";
+
+
+payrollData.forEach(
+item=>{
+
+csv+=
+`"${csvEscape(item.workerName)}",`+
+`"${csvEscape(item.category)}",`+
+`${item.dailyWage},`+
+`${item.presentDays},`+
+`${item.otHours},`+
+`${item.basicPay},`+
+`${item.otPay},`+
+`${item.totalPay}\n`;
+
+});
+
+
+const blob=
+new Blob(
+[csv],
+{
+type:
+"text/csv;charset=utf-8;"
+}
+);
+
+
+const url=
+URL.createObjectURL(blob);
+
+
+const a=
+document.createElement("a");
+
+a.href=url;
+
+a.download=
+`VVS_Payroll_${from}_to_${to}.csv`;
+
+a.click();
+
+URL.revokeObjectURL(url);
+
+};
+
+
+/* ============================================
+   MONEY
+============================================ */
+
+function formatMoney(value){
+
+return Number(
+value||0
+).toLocaleString(
+"en-IN"
+);
+
+}
+
+
+/* ============================================
+   CSV ESCAPE
+============================================ */
+
+function csvEscape(value){
+
+return String(value)
+.replaceAll(
+'"',
+'""'
+);
+
+}
+
+
+/* ============================================
+   HTML SAFETY
+============================================ */
+
+function escapeHTML(value){
+
+return String(value)
+
+.replaceAll(
+"&",
+"&amp;"
+)
+
+.replaceAll(
+"<",
+"&lt;"
+)
+
+.replaceAll(
+">",
+"&gt;"
+)
+
+.replaceAll(
+'"',
+"&quot;"
+)
+
+.replaceAll(
+"'",
+"&#039;"
+);
+
+}
+
+
+/* ============================================
+   MESSAGE
+============================================ */
+
+function showMessage(
+text,
+type
+){
+
+const message=
+document.getElementById(
+"message"
+);
+
+message.textContent=
+text;
+
+message.className=
+"message show "+
+type;
+
+
+setTimeout(
+()=>{
+
+message.className=
+"message";
+
+},
+4000
+);
+
+}
+
+</script>
+
+</body>
+
+  </html>
