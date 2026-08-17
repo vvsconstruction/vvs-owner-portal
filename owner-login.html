@@ -2,39 +2,672 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
 <title>VVS Construction | Owner Login</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Poppins,sans-serif;
+}
+
 body{
-display:flex;justify-content:center;align-items:center;
-height:100vh;
-background:linear-gradient(rgba(6,25,55,.75),rgba(6,25,55,.75)),url('assets/images/background.jpg');
-background-size:cover;background-position:center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+
+  background:
+    linear-gradient(
+      rgba(6,25,55,.78),
+      rgba(6,25,55,.78)
+    ),
+    url('assets/images/background.jpg');
+
+  background-size:cover;
+  background-position:center;
 }
+
 .card{
-width:390px;
-background:rgba(255,255,255,.12);
-backdrop-filter:blur(16px);
-padding:35px;
-border-radius:20px;
-color:#fff;
-box-shadow:0 20px 50px rgba(0,0,0,.35);
+  width:390px;
+  max-width:92%;
+
+  background:rgba(255,255,255,.12);
+
+  backdrop-filter:blur(16px);
+
+  padding:35px;
+
+  border-radius:20px;
+
+  color:#fff;
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.35);
+
+  text-align:center;
 }
+
 .logo{
-width:90px;height:90px;border-radius:50%;
-background:#FFD700;color:#0b2545;
-display:flex;justify-content:center;align-items:center;
-margin:auto;font-size:30px;font-weight:700;
+  width:90px;
+  height:90px;
+
+  border-radius:50%;
+
+  background:#FFD700;
+  color:#0b2545;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  margin:auto;
+
+  font-size:30px;
+  font-weight:700;
+
+  box-shadow:
+    0 8px 25px rgba(255,215,0,.25);
 }
-h2{text-align:center;color:#FFD700;margin:18px 0 6px}
-p{text-align:center;color:#ddd;margin-bottom:25px}
-label{display:block;margin:12px 0 6px}
-input{
-width:100%;padding:14px;border:none;border-radius:10px;
+
+h2{
+  color:#FFD700;
+  margin:18px 0 6px;
+}
+
+p{
+  color:#ddd;
+  margin-bottom:30px;
+  font-size:14px;
+  line-height:1.6;
+}
+
+/* BIOMETRIC BUTTON */
+
+#biometricBtn{
+
+  width:100%;
+
+  padding:16px;
+
+  border:none;
+
+  border-radius:12px;
+
+  background:#FFD700;
+
+  color:#0b2545;
+
+  font-size:16px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.3s;
+
+  box-shadow:
+    0 8px 20px rgba(255,215,0,.25);
+}
+
+#biometricBtn:hover{
+
+  background:#ffca00;
+
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(255,215,0,.4);
+}
+
+#biometricBtn:active{
+  transform:scale(.98);
+}
+
+#biometricBtn:disabled{
+
+  opacity:.7;
+
+  cursor:not-allowed;
+
+  transform:none;
+}
+
+/* ICON */
+
+.faceIcon{
+
+  font-size:30px;
+
+  display:block;
+
+  margin-bottom:5px;
+}
+
+/* STATUS */
+
+#status{
+
+  margin-top:20px;
+
+  min-height:24px;
+
+  color:#ddd;
+
+  font-size:13px;
+
+  line-height:1.5;
+}
+
+/* LOADER */
+
+.loader{
+
+  display:none;
+
+  width:18px;
+  height:18px;
+
+  border:3px solid rgba(11,37,69,.3);
+
+  border-top-color:#0b2545;
+
+  border-radius:50%;
+
+  animation:spin .8s linear infinite;
+
+  vertical-align:middle;
+
+  margin-left:8px;
+}
+
+@keyframes spin{
+
+  from{
+    transform:rotate(0deg);
+  }
+
+  to{
+    transform:rotate(360deg);
+  }
+
+}
+
+/* PASSWORD RECOVERY */
+
+.recovery{
+
+  display:block;
+
+  margin-top:22px;
+
+  color:#bbb;
+
+  font-size:12px;
+
+  text-decoration:none;
+}
+
+.recovery:hover{
+  color:#FFD700;
+}
+
+/* FOOTER */
+
+.footer{
+
+  text-align:center;
+
+  margin-top:25px;
+
+  color:#aaa;
+
+  font-size:11px;
+
+  line-height:1.6;
+}
+
+</style>
+
+
+<script type="module">
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
+import {
+  initializeApp
+}
+from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+import {
+  getAuth,
+  signInWithCustomToken,
+  onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence
+}
+from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+
+/* =====================================================
+   SIMPLEWEBAUTHN BROWSER
+===================================================== */
+
+import {
+  startAuthentication
+}
+from "https://cdn.jsdelivr.net/npm/@simplewebauthn/browser@13.2.2/+esm";
+
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyDQGsKaMXv-y7RadDHZBBHk1QDEWYuMt34",
+
+  authDomain:
+    "vvs-construction.firebaseapp.com",
+
+  projectId:
+    "vvs-construction",
+
+  storageBucket:
+    "vvs-construction.firebasestorage.app",
+
+  messagingSenderId:
+    "997782914494",
+
+  appId:
+    "1:997782914494:web:30e188d05e1607780fe5ef"
+
+};
+
+
+const app =
+  initializeApp(firebaseConfig);
+
+const auth =
+  getAuth(app);
+
+
+/* =====================================================
+   CLOUD FUNCTIONS
+===================================================== */
+
+const FUNCTIONS_BASE =
+  "https://us-central1-vvs-construction.cloudfunctions.net";
+
+
+const LOGIN_OPTIONS_URL =
+  `${FUNCTIONS_BASE}/passkeyLoginOptions`;
+
+
+const LOGIN_VERIFY_URL =
+  `${FUNCTIONS_BASE}/passkeyLoginVerify`;
+
+
+/* =====================================================
+   CHECK EXISTING LOGIN
+===================================================== */
+
+onAuthStateChanged(auth,(user)=>{
+
+  if(user){
+
+    window.location.replace(
+      "owner-dashboard.html"
+    );
+
+  }
+
+});
+
+
+/* =====================================================
+   BIOMETRIC LOGIN
+===================================================== */
+
+window.loginWithBiometric =
+async function(){
+
+  const button =
+    document.getElementById(
+      "biometricBtn"
+    );
+
+  const status =
+    document.getElementById(
+      "status"
+    );
+
+  const loader =
+    document.getElementById(
+      "loader"
+    );
+
+
+  /* Browser support */
+
+  if(
+    !window.PublicKeyCredential
+  ){
+
+    status.textContent =
+      "This browser does not support Passkey login.";
+
+    return;
+
+  }
+
+
+  /* Loading */
+
+  button.disabled = true;
+
+  loader.style.display =
+    "inline-block";
+
+  status.textContent =
+    "Preparing secure login...";
+
+
+  try{
+
+    /* ==========================================
+       STEP 1
+       GET AUTHENTICATION OPTIONS
+    ========================================== */
+
+    const optionsResponse =
+      await fetch(
+        LOGIN_OPTIONS_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:JSON.stringify({})
+        }
+      );
+
+
+    const optionsData =
+      await optionsResponse.json();
+
+
+    if(
+      !optionsResponse.ok ||
+      !optionsData.options
+    ){
+
+      throw new Error(
+        optionsData.error ||
+        "Unable to start biometric login."
+      );
+
+    }
+
+
+    /* ==========================================
+       STEP 2
+       PHONE FACE / FINGERPRINT
+    ========================================== */
+
+    status.textContent =
+      "Use Face Unlock or Fingerprint...";
+
+
+    const authenticationResponse =
+      await startAuthentication({
+        optionsJSON:
+          optionsData.options
+      });
+
+
+    /* ==========================================
+       STEP 3
+       SEND VERIFIED RESPONSE TO SERVER
+    ========================================== */
+
+    status.textContent =
+      "Verifying biometric authentication...";
+
+
+    const verifyResponse =
+      await fetch(
+        LOGIN_VERIFY_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:JSON.stringify({
+
+            sessionID:
+              optionsData.sessionID,
+
+            response:
+              authenticationResponse
+
+          })
+
+        }
+      );
+
+
+    const verifyData =
+      await verifyResponse.json();
+
+
+    if(
+      !verifyResponse.ok ||
+      !verifyData.success ||
+      !verifyData.token
+    ){
+
+      throw new Error(
+        verifyData.error ||
+        "Biometric verification failed."
+      );
+
+    }
+
+
+    /* ==========================================
+       STEP 4
+       FIREBASE LOGIN
+    ========================================== */
+
+    status.textContent =
+      "Login successful ✓";
+
+
+    await setPersistence(
+      auth,
+      browserLocalPersistence
+    );
+
+
+    await signInWithCustomToken(
+      auth,
+      verifyData.token
+    );
+
+
+    /* ==========================================
+       STEP 5
+       DASHBOARD
+    ========================================== */
+
+    setTimeout(()=>{
+
+      window.location.replace(
+        "owner-dashboard.html"
+      );
+
+    },500);
+
+
+  }catch(error){
+
+    console.error(
+      "Biometric login error:",
+      error
+    );
+
+
+    if(
+      error.name ===
+      "NotAllowedError"
+    ){
+
+      status.textContent =
+        "Authentication cancelled or timed out.";
+
+    }
+
+    else{
+
+      status.textContent =
+        error.message ||
+        "Face/Fingerprint login failed.";
+
+    }
+
+    button.disabled = false;
+
+    loader.style.display =
+      "none";
+
+  }
+
+};
+
+
+/* =====================================================
+   ENTER KEY
+===================================================== */
+
+document.addEventListener(
+  "keydown",
+  (event)=>{
+
+    if(
+      event.key === "Enter"
+    ){
+
+      const button =
+        document.getElementById(
+          "biometricBtn"
+        );
+
+      if(!button.disabled){
+
+        window.loginWithBiometric();
+
+      }
+
+    }
+
+  }
+);
+
+</script>
+
+</head>
+
+
+<body>
+
+<div class="card">
+
+  <div class="logo">
+    VVS
+  </div>
+
+
+  <h2>
+    OWNER LOGIN
+  </h2>
+
+
+  <p>
+    VVS Construction<br>
+    Workforce Management
+  </p>
+
+
+  <!-- BIOMETRIC LOGIN -->
+
+  <button
+    id="biometricBtn"
+    onclick="loginWithBiometric()"
+  >
+
+    <span class="faceIcon">
+      🔐
+    </span>
+
+    LOGIN WITH<br>
+    FACE / FINGERPRINT
+
+    <span
+      id="loader"
+      class="loader"
+    ></span>
+
+  </button>
+
+
+  <div id="status">
+
+    Use your phone's biometric security
+
+  </div>
+
+
+  <!-- RECOVERY -->
+
+  <a
+    class="recovery"
+    href="owner-password-login.html"
+  >
+    Use password instead
+  </a>
+
+
+  <div class="footer">
+
+    VVS Construction Workforce Suite<br>
+
+    Version 1.0
+
+  </div>
+
+</div>
+
+</body>
+</html>width:100%;padding:14px;border:none;border-radius:10px;
 background:rgba(255,255,255,.15);color:#fff;outline:none;
 }
 input::placeholder{color:#ddd}
