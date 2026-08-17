@@ -1,0 +1,2887 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,initial-scale=1">
+
+<title>VVS Construction | Projects</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Poppins,sans-serif;
+}
+
+body{
+  background:#eef4fb;
+  color:#0b2545;
+  padding-bottom:90px;
+}
+
+button,
+input,
+select,
+textarea{
+  font-family:Poppins,sans-serif;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+
+  background:linear-gradient(
+    135deg,
+    #082a59,
+    #114d9a
+  );
+
+  color:white;
+  padding:18px;
+
+  box-shadow:
+    0 8px 25px rgba(0,0,0,.18);
+
+  position:sticky;
+  top:0;
+  z-index:1000;
+
+}
+
+.headerTop{
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+}
+
+.headerLeft{
+
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+}
+
+.logoCircle{
+
+  width:45px;
+  height:45px;
+  border-radius:50%;
+
+  background:#FFD700;
+  color:#082a59;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:20px;
+  font-weight:700;
+
+}
+
+.headerTitle h2{
+  font-size:20px;
+}
+
+.headerTitle small{
+  opacity:.8;
+  font-size:12px;
+}
+
+.backBtn{
+
+  border:none;
+  background:rgba(255,255,255,.12);
+
+  color:white;
+
+  width:40px;
+  height:40px;
+
+  border-radius:10px;
+
+  font-size:22px;
+
+  cursor:pointer;
+
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container{
+
+  max-width:1400px;
+  margin:auto;
+  padding:18px;
+
+}
+
+
+/* =========================================================
+   PAGE TITLE
+========================================================= */
+
+.pageTitle{
+
+  margin-bottom:18px;
+
+}
+
+.pageTitle h1{
+
+  font-size:26px;
+
+}
+
+.pageTitle p{
+
+  margin-top:4px;
+  color:#777;
+  font-size:13px;
+
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.card{
+
+  background:white;
+
+  padding:18px;
+
+  border-radius:18px;
+
+  box-shadow:
+    0 8px 22px rgba(0,0,0,.08);
+
+  margin-bottom:18px;
+
+}
+
+.cardTitle{
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  margin-bottom:16px;
+
+}
+
+.cardTitle h3{
+
+  color:#082a59;
+  font-size:17px;
+
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.formGrid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:14px;
+
+}
+
+.formGroup{
+
+  width:100%;
+
+}
+
+.formGroup.full{
+
+  grid-column:1/-1;
+
+}
+
+label{
+
+  display:block;
+
+  font-size:12px;
+
+  font-weight:600;
+
+  margin-bottom:5px;
+
+  color:#344054;
+
+}
+
+input,
+select,
+textarea{
+
+  width:100%;
+
+  padding:12px;
+
+  border:1px solid #d9dee7;
+
+  border-radius:10px;
+
+  outline:none;
+
+  font-size:14px;
+
+  background:white;
+
+}
+
+textarea{
+
+  resize:vertical;
+
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+  border-color:#2563eb;
+
+  box-shadow:
+    0 0 0 3px rgba(37,99,235,.10);
+
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.buttonRow{
+
+  display:flex;
+
+  gap:10px;
+
+  margin-top:16px;
+
+  flex-wrap:wrap;
+
+}
+
+.btn{
+
+  border:none;
+
+  border-radius:10px;
+
+  padding:11px 17px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+}
+
+.btnPrimary{
+
+  background:#0b2545;
+  color:white;
+
+}
+
+.btnPrimary:hover{
+
+  background:#114d9a;
+
+}
+
+.btnGold{
+
+  background:#FFD700;
+  color:#082a59;
+
+}
+
+.btnDanger{
+
+  background:#fee2e2;
+  color:#b91c1c;
+
+}
+
+.btnSecondary{
+
+  background:#eef4fb;
+  color:#2563eb;
+
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.summary{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:12px;
+
+  margin-bottom:18px;
+
+}
+
+.summaryBox{
+
+  background:white;
+
+  padding:16px;
+
+  border-radius:16px;
+
+  box-shadow:
+    0 7px 18px rgba(0,0,0,.07);
+
+}
+
+.summaryBox p{
+
+  color:#777;
+  font-size:12px;
+
+}
+
+.summaryBox strong{
+
+  display:block;
+
+  font-size:25px;
+
+  margin-top:5px;
+
+}
+
+.blue{
+  color:#2563eb;
+}
+
+.green{
+  color:#16a34a;
+}
+
+.orange{
+  color:#ea580c;
+}
+
+.purple{
+  color:#7c3aed;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.searchBar{
+
+  display:flex;
+  gap:10px;
+
+  margin-bottom:15px;
+
+}
+
+.searchBar input{
+
+  flex:1;
+
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.tableWrap{
+
+  overflow-x:auto;
+
+}
+
+table{
+
+  width:100%;
+
+  border-collapse:collapse;
+
+  min-width:1000px;
+
+}
+
+th,
+td{
+
+  padding:12px;
+
+  border-bottom:
+    1px solid #edf0f4;
+
+  text-align:left;
+
+  font-size:12px;
+
+}
+
+th{
+
+  background:#082a59;
+  color:white;
+
+  white-space:nowrap;
+
+}
+
+td{
+
+  color:#344054;
+
+}
+
+.projectName{
+
+  font-weight:700;
+  color:#082a59;
+
+}
+
+.status{
+
+  display:inline-block;
+
+  padding:5px 9px;
+
+  border-radius:8px;
+
+  font-size:10px;
+
+  font-weight:700;
+
+}
+
+.statusPlanning{
+
+  background:#fef3c7;
+  color:#92400e;
+
+}
+
+.statusProgress{
+
+  background:#dbeafe;
+  color:#1d4ed8;
+
+}
+
+.statusCompleted{
+
+  background:#dcfce7;
+  color:#166534;
+
+}
+
+.statusHold{
+
+  background:#fee2e2;
+  color:#991b1b;
+
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progressBox{
+
+  min-width:120px;
+
+}
+
+.progressTop{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  font-size:11px;
+
+  font-weight:700;
+
+  margin-bottom:5px;
+
+}
+
+.progressPercent{
+
+  color:#2563eb;
+
+}
+
+.progressBar{
+
+  width:100%;
+
+  height:8px;
+
+  background:#e5e7eb;
+
+  border-radius:50px;
+
+  overflow:hidden;
+
+}
+
+.progressFill{
+
+  height:100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      #2563eb,
+      #0ea5e9
+    );
+
+  border-radius:50px;
+
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
+
+.actionButtons{
+
+  display:flex;
+  gap:6px;
+
+}
+
+.smallBtn{
+
+  border:none;
+
+  padding:7px 9px;
+
+  border-radius:7px;
+
+  cursor:pointer;
+
+  font-size:11px;
+
+  font-weight:700;
+
+}
+
+.editBtn{
+
+  background:#eef4fb;
+  color:#2563eb;
+
+}
+
+.deleteBtn{
+
+  background:#fee2e2;
+  color:#dc2626;
+
+}
+
+
+/* =========================================================
+   MOBILE CARDS
+========================================================= */
+
+.mobileProjects{
+
+  display:none;
+
+}
+
+.projectCard{
+
+  border:1px solid #e5e7eb;
+
+  background:#f8fafc;
+
+  border-radius:15px;
+
+  padding:15px;
+
+  margin-bottom:12px;
+
+}
+
+.projectCardTop{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  margin-bottom:10px;
+
+}
+
+.projectCardName{
+
+  font-size:16px;
+
+  font-weight:700;
+
+  color:#082a59;
+
+}
+
+.projectClient{
+
+  color:#777;
+
+  font-size:11px;
+
+  margin-top:2px;
+
+}
+
+.infoGrid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:8px;
+
+  margin-top:10px;
+
+}
+
+.infoItem{
+
+  background:white;
+
+  padding:9px;
+
+  border-radius:9px;
+
+}
+
+.infoItem small{
+
+  display:block;
+
+  color:#777;
+
+  font-size:9px;
+
+}
+
+.infoItem strong{
+
+  display:block;
+
+  margin-top:2px;
+
+  font-size:11px;
+
+}
+
+.mobileActions{
+
+  display:flex;
+
+  gap:8px;
+
+  margin-top:12px;
+
+}
+
+.mobileActions button{
+
+  flex:1;
+
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty{
+
+  padding:30px 10px;
+
+  text-align:center;
+
+  color:#777;
+
+  font-size:13px;
+
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.message{
+
+  display:none;
+
+  padding:12px;
+
+  border-radius:10px;
+
+  margin-top:14px;
+
+  font-size:13px;
+
+}
+
+.message.success{
+
+  display:block;
+
+  background:#dcfce7;
+  color:#166534;
+
+}
+
+.message.error{
+
+  display:block;
+
+  background:#fee2e2;
+  color:#991b1b;
+
+}
+
+
+/* =========================================================
+   BOTTOM NAV
+========================================================= */
+
+.bottomNav{
+
+  position:fixed;
+
+  left:0;
+  right:0;
+  bottom:0;
+
+  height:68px;
+
+  background:white;
+
+  display:flex;
+
+  justify-content:space-around;
+
+  align-items:center;
+
+  box-shadow:
+    0 -5px 20px rgba(0,0,0,.12);
+
+  z-index:2000;
+
+}
+
+.bottomNav a{
+
+  flex:1;
+
+  text-decoration:none;
+
+  color:#0b2545;
+
+  text-align:center;
+
+  font-size:11px;
+
+  font-weight:600;
+
+  line-height:18px;
+
+}
+
+.bottomNav a.active{
+
+  color:#2563eb;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:900px){
+
+  .summary{
+
+    grid-template-columns:
+      repeat(2,1fr);
+
+  }
+
+}
+
+
+@media(max-width:700px){
+
+  body{
+
+    padding-bottom:82px;
+
+  }
+
+  .container{
+
+    padding:12px;
+
+  }
+
+  .header{
+
+    padding:14px;
+
+  }
+
+  .headerTitle h2{
+
+    font-size:17px;
+
+  }
+
+  .headerTitle small{
+
+    font-size:10px;
+
+  }
+
+  .logoCircle{
+
+    width:40px;
+    height:40px;
+
+    font-size:18px;
+
+  }
+
+  .pageTitle h1{
+
+    font-size:22px;
+
+  }
+
+  .formGrid{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .formGroup.full{
+
+    grid-column:auto;
+
+  }
+
+  .summaryBox strong{
+
+    font-size:21px;
+
+  }
+
+  .searchBar{
+
+    flex-direction:column;
+
+  }
+
+  .desktopProjects{
+
+    display:none;
+
+  }
+
+  .mobileProjects{
+
+    display:block;
+
+  }
+
+  .card{
+
+    padding:15px;
+
+  }
+
+}
+
+
+@media(min-width:768px){
+
+  .bottomNav{
+
+    display:none;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="header">
+
+  <div class="headerTop">
+
+    <div class="headerLeft">
+
+      <button
+        class="backBtn"
+        onclick="location.href='owner-dashboard.html'"
+      >
+        ←
+      </button>
+
+      <div class="logoCircle">
+        V
+      </div>
+
+      <div class="headerTitle">
+
+        <h2>
+          VVS Construction
+        </h2>
+
+        <small>
+          Project Management
+        </small>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<div class="container">
+
+
+  <div class="pageTitle">
+
+    <h1>
+      📁 Projects
+    </h1>
+
+    <p>
+      Manage construction projects, clients and progress.
+    </p>
+
+  </div>
+
+
+  <!-- =====================================================
+       SUMMARY
+  ====================================================== -->
+
+  <div class="summary">
+
+    <div class="summaryBox">
+
+      <p>
+        Total Projects
+      </p>
+
+      <strong
+        id="totalProjects"
+        class="blue"
+      >
+        0
+      </strong>
+
+    </div>
+
+
+    <div class="summaryBox">
+
+      <p>
+        In Progress
+      </p>
+
+      <strong
+        id="activeProjects"
+        class="green"
+      >
+        0
+      </strong>
+
+    </div>
+
+
+    <div class="summaryBox">
+
+      <p>
+        Completed
+      </p>
+
+      <strong
+        id="completedProjects"
+        class="orange"
+      >
+        0
+      </strong>
+
+    </div>
+
+
+    <div class="summaryBox">
+
+      <p>
+        Average Progress
+      </p>
+
+      <strong
+        id="averageProgress"
+        class="purple"
+      >
+        0%
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       ADD / EDIT PROJECT
+  ====================================================== -->
+
+  <div class="card">
+
+    <div class="cardTitle">
+
+      <h3 id="formTitle">
+        ➕ Add New Project
+      </h3>
+
+    </div>
+
+
+    <div class="formGrid">
+
+
+      <div class="formGroup">
+
+        <label>
+          Project Name *
+        </label>
+
+        <input
+          id="projectName"
+          placeholder="Example: KKNPP Civil Works"
+        >
+
+      </div>
+
+
+      <div class="formGroup">
+
+        <label>
+          Client Name
+        </label>
+
+        <input
+          id="clientName"
+          placeholder="Client name"
+        >
+
+      </div>
+
+
+      <div class="formGroup">
+
+        <label>
+          Location
+        </label>
+
+        <input
+          id="location"
+          placeholder="Project location"
+        >
+
+      </div>
+
+
+      <div class="formGroup">
+
+        <label>
+          Status
+        </label>
+
+        <select id="status">
+
+          <option value="Planning">
+            Planning
+          </option>
+
+          <option value="In Progress">
+            In Progress
+          </option>
+
+          <option value="Completed">
+            Completed
+          </option>
+
+          <option value="On Hold">
+            On Hold
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="formGroup">
+
+        <label>
+          Start Date
+        </label>
+
+        <input
+          id="startDate"
+          type="date"
+        >
+
+      </div>
+
+
+      <div class="formGroup">
+
+        <label>
+          End Date
+        </label>
+
+        <input
+          id="endDate"
+          type="date"
+        >
+
+      </div>
+
+
+      <div class="formGroup">
+
+        <label>
+          Progress (%)
+        </label>
+
+        <input
+          id="progress"
+          type="number"
+          min="0"
+          max="100"
+          value="0"
+          placeholder="0 - 100"
+        >
+
+      </div>
+
+
+      <div class="formGroup">
+
+        <label>
+          Project Budget (₹)
+        </label>
+
+        <input
+          id="budget"
+          type="number"
+          min="0"
+          placeholder="Project budget"
+        >
+
+      </div>
+
+
+      <div class="formGroup full">
+
+        <label>
+          Project Description
+        </label>
+
+        <textarea
+          id="description"
+          rows="3"
+          placeholder="Project description..."
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <div class="buttonRow">
+
+      <button
+        id="saveBtn"
+        class="btn btnPrimary"
+        onclick="saveProject()"
+      >
+        💾 Save Project
+      </button>
+
+      <button
+        id="cancelBtn"
+        class="btn btnSecondary"
+        onclick="cancelEdit()"
+        style="display:none"
+      >
+        Cancel
+      </button>
+
+    </div>
+
+
+    <div
+      id="message"
+      class="message"
+    ></div>
+
+  </div>
+
+
+  <!-- =====================================================
+       PROJECT LIST
+  ====================================================== -->
+
+  <div class="card">
+
+    <div class="cardTitle">
+
+      <h3>
+        🚧 Project List
+      </h3>
+
+    </div>
+
+
+    <div class="searchBar">
+
+      <input
+        id="search"
+        placeholder="🔍 Search project, client or location..."
+      >
+
+    </div>
+
+
+    <!-- DESKTOP -->
+
+    <div class="desktopProjects">
+
+      <div class="tableWrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Project
+              </th>
+
+              <th>
+                Client
+              </th>
+
+              <th>
+                Location
+              </th>
+
+              <th>
+                Status
+              </th>
+
+              <th>
+                Progress
+              </th>
+
+              <th>
+                Dates
+              </th>
+
+              <th>
+                Action
+              </th>
+
+            </tr>
+
+          </thead>
+
+          <tbody id="projectTable">
+
+            <tr>
+
+              <td
+                colspan="7"
+                class="empty"
+              >
+                Loading projects...
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+
+    <!-- MOBILE -->
+
+    <div
+      id="mobileProjects"
+      class="mobileProjects"
+    >
+
+      <div class="empty">
+        Loading projects...
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     BOTTOM NAV
+========================================================= -->
+
+<div class="bottomNav">
+
+  <a href="owner-dashboard.html">
+
+    🏠<br>
+    Home
+
+  </a>
+
+
+  <a href="workers.html">
+
+    👷<br>
+    Workers
+
+  </a>
+
+
+  <a href="attendance.html">
+
+    📅<br>
+    Attendance
+
+  </a>
+
+
+  <a href="payroll.html">
+
+    💰<br>
+    Payroll
+
+  </a>
+
+
+  <a
+    href="projects.html"
+    class="active"
+  >
+
+    📁<br>
+    Projects
+
+  </a>
+
+</div>
+
+
+<!-- =========================================================
+     FIREBASE
+========================================================= -->
+
+<script type="module">
+
+
+import {
+
+  initializeApp
+
+}
+
+from
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+
+import {
+
+  getFirestore,
+  collection,
+  onSnapshot,
+  addDoc,
+  doc,
+  updateDoc,
+  deleteDoc
+
+}
+
+from
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+import {
+
+  getAuth,
+  onAuthStateChanged
+
+}
+
+from
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyDQGsKaMXv-y7RadDHZBBHk1QDEWYuMt34",
+
+  authDomain:
+    "vvs-construction.firebaseapp.com",
+
+  projectId:
+    "vvs-construction",
+
+  storageBucket:
+    "vvs-construction.firebasestorage.app",
+
+  messagingSenderId:
+    "997782914494",
+
+  appId:
+    "1:997782914494:web:30e188d05e1607780fe5ef"
+
+};
+
+
+const app =
+  initializeApp(
+    firebaseConfig
+  );
+
+
+const db =
+  getFirestore(app);
+
+
+const auth =
+  getAuth(app);
+
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+onAuthStateChanged(
+
+  auth,
+
+  user => {
+
+    if(!user){
+
+      window.location.href =
+        "owner-login.html";
+
+    }
+
+  }
+
+);
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+let projects = [];
+
+let editingId = null;
+
+
+/* =========================================================
+   FIREBASE LIVE PROJECTS
+========================================================= */
+
+onSnapshot(
+
+  collection(
+    db,
+    "projects"
+  ),
+
+  snap => {
+
+    projects = [];
+
+    snap.forEach(
+
+      projectDoc => {
+
+        projects.push({
+
+          id:
+            projectDoc.id,
+
+          ...projectDoc.data()
+
+        });
+
+      }
+
+    );
+
+
+    renderProjects();
+
+    updateSummary();
+
+  },
+
+  error => {
+
+    console.error(
+      "Projects error:",
+      error
+    );
+
+    showMessage(
+      "Unable to load projects. Check Firebase permissions.",
+      "error"
+    );
+
+  }
+
+);
+
+
+/* =========================================================
+   SAVE PROJECT
+========================================================= */
+
+window.saveProject =
+async function(){
+
+  const projectName =
+    document.getElementById(
+      "projectName"
+    ).value.trim();
+
+
+  if(!projectName){
+
+    showMessage(
+      "Please enter a project name.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const progress =
+    Math.max(
+      0,
+      Math.min(
+        100,
+        Number(
+          document.getElementById(
+            "progress"
+          ).value || 0
+        )
+      )
+    );
+
+
+  const data = {
+
+    projectName,
+
+    clientName:
+      document.getElementById(
+        "clientName"
+      ).value.trim(),
+
+    location:
+      document.getElementById(
+        "location"
+      ).value.trim(),
+
+    startDate:
+      document.getElementById(
+        "startDate"
+      ).value,
+
+    endDate:
+      document.getElementById(
+        "endDate"
+      ).value,
+
+    status:
+      document.getElementById(
+        "status"
+      ).value,
+
+    progress,
+
+    percentage:
+      progress,
+
+    budget:
+      Number(
+        document.getElementById(
+          "budget"
+        ).value || 0
+      ),
+
+    description:
+      document.getElementById(
+        "description"
+      ).value.trim(),
+
+    updatedAt:
+      new Date().toISOString()
+
+  };
+
+
+  const button =
+    document.getElementById(
+      "saveBtn"
+    );
+
+
+  button.disabled = true;
+
+
+  try{
+
+    if(editingId){
+
+      await updateDoc(
+
+        doc(
+          db,
+          "projects",
+          editingId
+        ),
+
+        data
+
+      );
+
+
+      showMessage(
+        "✅ Project updated successfully.",
+        "success"
+      );
+
+    }
+
+    else{
+
+      data.createdAt =
+        new Date().toISOString();
+
+
+      await addDoc(
+
+        collection(
+          db,
+          "projects"
+        ),
+
+        data
+
+      );
+
+
+      showMessage(
+        "✅ Project saved successfully.",
+        "success"
+      );
+
+    }
+
+
+    clearForm();
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Save project error:",
+      error
+    );
+
+    showMessage(
+      "Unable to save project. Check Firebase permissions.",
+      "error"
+    );
+
+  }
+
+  button.disabled = false;
+
+};
+
+
+/* =========================================================
+   EDIT PROJECT
+========================================================= */
+
+window.editProject =
+function(id){
+
+  const project =
+    projects.find(
+      item =>
+        item.id === id
+    );
+
+
+  if(!project){
+
+    return;
+
+  }
+
+
+  editingId = id;
+
+
+  document.getElementById(
+    "formTitle"
+  ).textContent =
+    "✏️ Edit Project";
+
+
+  document.getElementById(
+    "projectName"
+  ).value =
+    project.projectName || "";
+
+
+  document.getElementById(
+    "clientName"
+  ).value =
+    project.clientName || "";
+
+
+  document.getElementById(
+    "location"
+  ).value =
+    project.location || "";
+
+
+  document.getElementById(
+    "startDate"
+  ).value =
+    project.startDate || "";
+
+
+  document.getElementById(
+    "endDate"
+  ).value =
+    project.endDate || "";
+
+
+  document.getElementById(
+    "status"
+  ).value =
+    project.status || "Planning";
+
+
+  document.getElementById(
+    "progress"
+  ).value =
+    project.progress ??
+    project.percentage ??
+    0;
+
+
+  document.getElementById(
+    "budget"
+  ).value =
+    project.budget || "";
+
+
+  document.getElementById(
+    "description"
+  ).value =
+    project.description || "";
+
+
+  document.getElementById(
+    "cancelBtn"
+  ).style.display =
+    "inline-block";
+
+
+  document.getElementById(
+    "saveBtn"
+  ).textContent =
+    "💾 Update Project";
+
+
+  window.scrollTo({
+
+    top:0,
+
+    behavior:"smooth"
+
+  });
+
+};
+
+
+/* =========================================================
+   DELETE PROJECT
+========================================================= */
+
+window.deleteProject =
+async function(id){
+
+  const project =
+    projects.find(
+      item =>
+        item.id === id
+    );
+
+
+  if(!project){
+
+    return;
+
+  }
+
+
+  const confirmed =
+    confirm(
+
+      `Delete project "${project.projectName || "this project"}"?\n\nThis action cannot be undone.`
+
+    );
+
+
+  if(!confirmed){
+
+    return;
+
+  }
+
+
+  try{
+
+    await deleteDoc(
+
+      doc(
+        db,
+        "projects",
+        id
+      )
+
+    );
+
+
+    if(editingId === id){
+
+      clearForm();
+
+    }
+
+
+    showMessage(
+      "🗑️ Project deleted successfully.",
+      "success"
+    );
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Delete error:",
+      error
+    );
+
+    showMessage(
+      "Unable to delete project.",
+      "error"
+    );
+
+  }
+
+};
+
+
+/* =========================================================
+   CANCEL EDIT
+========================================================= */
+
+window.cancelEdit =
+function(){
+
+  clearForm();
+
+};
+
+
+/* =========================================================
+   CLEAR FORM
+========================================================= */
+
+function clearForm(){
+
+  editingId = null;
+
+
+  document.getElementById(
+    "formTitle"
+  ).textContent =
+    "➕ Add New Project";
+
+
+  document.getElementById(
+    "projectName"
+  ).value = "";
+
+
+  document.getElementById(
+    "clientName"
+  ).value = "";
+
+
+  document.getElementById(
+    "location"
+  ).value = "";
+
+
+  document.getElementById(
+    "startDate"
+  ).value = "";
+
+
+  document.getElementById(
+    "endDate"
+  ).value = "";
+
+
+  document.getElementById(
+    "status"
+  ).value =
+    "Planning";
+
+
+  document.getElementById(
+    "progress"
+  ).value =
+    0;
+
+
+  document.getElementById(
+    "budget"
+  ).value = "";
+
+
+  document.getElementById(
+    "description"
+  ).value = "";
+
+
+  document.getElementById(
+    "cancelBtn"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "saveBtn"
+  ).textContent =
+    "💾 Save Project";
+
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function renderProjects(){
+
+  const search =
+    document.getElementById(
+      "search"
+    ).value
+      .toLowerCase()
+      .trim();
+
+
+  const filtered =
+    projects.filter(
+
+      project => {
+
+        const text = (
+
+          project.projectName ||
+          "" + " " +
+
+          project.clientName ||
+          "" + " " +
+
+          project.location ||
+          "" + " " +
+
+          project.status ||
+          ""
+
+        ).toLowerCase();
+
+
+        return text.includes(search);
+
+      }
+
+    );
+
+
+  renderDesktop(
+    filtered
+  );
+
+
+  renderMobile(
+    filtered
+  );
+
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+function renderDesktop(
+  data
+){
+
+  const tbody =
+    document.getElementById(
+      "projectTable"
+    );
+
+
+  if(!data.length){
+
+    tbody.innerHTML = `
+
+      <tr>
+
+        <td
+          colspan="7"
+          class="empty"
+        >
+          No projects found.
+        </td>
+
+      </tr>
+
+    `;
+
+    return;
+
+  }
+
+
+  tbody.innerHTML =
+
+    data.map(
+
+      project => {
+
+        const progress =
+          getProgress(
+            project
+          );
+
+
+        return `
+
+          <tr>
+
+            <td>
+
+              <div class="projectName">
+
+                ${escapeHTML(
+                  project.projectName ||
+                  "Unnamed Project"
+                )}
+
+              </div>
+
+              <small>
+
+                ${escapeHTML(
+                  project.description ||
+                  ""
+                )}
+
+              </small>
+
+            </td>
+
+
+            <td>
+
+              ${escapeHTML(
+                project.clientName ||
+                "-"
+              )}
+
+            </td>
+
+
+            <td>
+
+              ${escapeHTML(
+                project.location ||
+                "-"
+              )}
+
+            </td>
+
+
+            <td>
+
+              ${statusHTML(
+                project.status
+              )}
+
+            </td>
+
+
+            <td>
+
+              <div class="progressBox">
+
+                <div class="progressTop">
+
+                  <span>
+                    Progress
+                  </span>
+
+                  <span
+                    class="progressPercent"
+                  >
+                    ${progress}%
+                  </span>
+
+                </div>
+
+                <div class="progressBar">
+
+                  <div
+                    class="progressFill"
+                    style="width:${progress}%"
+                  ></div>
+
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <td>
+
+              ${formatDate(
+                project.startDate
+              )}
+
+              <br>
+
+              →
+
+              <br>
+
+              ${formatDate(
+                project.endDate
+              )}
+
+            </td>
+
+
+            <td>
+
+              <div class="actionButtons">
+
+                <button
+                  class="smallBtn editBtn"
+                  onclick="editProject('${project.id}')"
+                >
+                  ✏️
+                </button>
+
+                <button
+                  class="smallBtn deleteBtn"
+                  onclick="deleteProject('${project.id}')"
+                >
+                  🗑️
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        `;
+
+      }
+
+    ).join("");
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+function renderMobile(
+  data
+){
+
+  const container =
+    document.getElementById(
+      "mobileProjects"
+    );
+
+
+  if(!data.length){
+
+    container.innerHTML = `
+
+      <div class="empty">
+        No projects found.
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+
+    data.map(
+
+      project => {
+
+        const progress =
+          getProgress(
+            project
+          );
+
+
+        return `
+
+          <div class="projectCard">
+
+
+            <div class="projectCardTop">
+
+              <div>
+
+                <div class="projectCardName">
+
+                  ${escapeHTML(
+                    project.projectName ||
+                    "Unnamed Project"
+                  )}
+
+                </div>
+
+                <div class="projectClient">
+
+                  ${escapeHTML(
+                    project.clientName ||
+                    "No client"
+                  )}
+
+                </div>
+
+              </div>
+
+
+              ${statusHTML(
+                project.status
+              )}
+
+            </div>
+
+
+            <div class="progressBox">
+
+              <div class="progressTop">
+
+                <span>
+                  Project Progress
+                </span>
+
+                <span
+                  class="progressPercent"
+                >
+                  ${progress}%
+                </span>
+
+              </div>
+
+
+              <div class="progressBar">
+
+                <div
+                  class="progressFill"
+                  style="width:${progress}%"
+                ></div>
+
+              </div>
+
+            </div>
+
+
+            <div class="infoGrid">
+
+
+              <div class="infoItem">
+
+                <small>
+                  📍 Location
+                </small>
+
+                <strong>
+                  ${escapeHTML(
+                    project.location ||
+                    "-"
+                  )}
+                </strong>
+
+              </div>
+
+
+              <div class="infoItem">
+
+                <small>
+                  📅 Start
+                </small>
+
+                <strong>
+                  ${formatDate(
+                    project.startDate
+                  )}
+                </strong>
+
+              </div>
+
+
+              <div class="infoItem">
+
+                <small>
+                  🏁 End
+                </small>
+
+                <strong>
+                  ${formatDate(
+                    project.endDate
+                  )}
+                </strong>
+
+              </div>
+
+
+              <div class="infoItem">
+
+                <small>
+                  💰 Budget
+                </small>
+
+                <strong>
+                  ${formatMoney(
+                    project.budget
+                  )}
+                </strong>
+
+              </div>
+
+
+            </div>
+
+
+            <div class="mobileActions">
+
+              <button
+                class="btn btnSecondary"
+                onclick="editProject('${project.id}')"
+              >
+                ✏️ Edit
+              </button>
+
+
+              <button
+                class="btn btnDanger"
+                onclick="deleteProject('${project.id}')"
+              >
+                🗑️ Delete
+              </button>
+
+            </div>
+
+
+          </div>
+
+        `;
+
+      }
+
+    ).join("");
+
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+function updateSummary(){
+
+  const total =
+    projects.length;
+
+
+  const active =
+    projects.filter(
+
+      project =>
+        project.status ===
+        "In Progress"
+
+    ).length;
+
+
+  const completed =
+    projects.filter(
+
+      project =>
+        project.status ===
+        "Completed"
+
+    ).length;
+
+
+  let progressTotal = 0;
+
+
+  projects.forEach(
+
+    project => {
+
+      progressTotal +=
+        getProgress(
+          project
+        );
+
+    }
+
+  );
+
+
+  const average =
+    total
+      ? Math.round(
+          progressTotal /
+          total
+        )
+      : 0;
+
+
+  document.getElementById(
+    "totalProjects"
+  ).textContent =
+    total;
+
+
+  document.getElementById(
+    "activeProjects"
+  ).textContent =
+    active;
+
+
+  document.getElementById(
+    "completedProjects"
+  ).textContent =
+    completed;
+
+
+  document.getElementById(
+    "averageProgress"
+  ).textContent =
+    average + "%";
+
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+function getProgress(
+  project
+){
+
+  let progress =
+    Number(
+      project.progress ??
+      project.percentage ??
+      0
+    );
+
+
+  return Math.max(
+    0,
+    Math.min(
+      100,
+      progress
+    )
+  );
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+function statusHTML(
+  status
+){
+
+  const value =
+    status ||
+    "Planning";
+
+
+  let className =
+    "statusPlanning";
+
+
+  if(
+    value ===
+    "In Progress"
+  ){
+
+    className =
+      "statusProgress";
+
+  }
+
+  else if(
+    value ===
+    "Completed"
+  ){
+
+    className =
+      "statusCompleted";
+
+  }
+
+  else if(
+    value ===
+    "On Hold"
+  ){
+
+    className =
+      "statusHold";
+
+  }
+
+
+  return `
+
+    <span
+      class="status ${className}"
+    >
+
+      ${escapeHTML(value)}
+
+    </span>
+
+  `;
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+document.getElementById(
+  "search"
+).addEventListener(
+
+  "input",
+
+  renderProjects
+
+);
+
+
+/* =========================================================
+   DATE FORMAT
+========================================================= */
+
+function formatDate(
+  value
+){
+
+  if(!value){
+
+    return "-";
+
+  }
+
+
+  const date =
+    new Date(
+      value + "T00:00:00"
+    );
+
+
+  if(
+    isNaN(
+      date.getTime()
+    )
+  ){
+
+    return value;
+
+  }
+
+
+  return date.toLocaleDateString(
+    "en-IN",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric"
+    }
+  );
+
+}
+
+
+/* =========================================================
+   MONEY
+========================================================= */
+
+function formatMoney(
+  value
+){
+
+  const amount =
+    Number(
+      value || 0
+    );
+
+
+  if(!amount){
+
+    return "₹0";
+
+  }
+
+
+  return "₹" +
+    amount.toLocaleString(
+      "en-IN"
+    );
+
+}
+
+
+/* =========================================================
+   HTML SAFETY
+========================================================= */
+
+function escapeHTML(
+  value
+){
+
+  return String(
+    value ?? ""
+  )
+
+  .replaceAll(
+    "&",
+    "&amp;"
+  )
+
+  .replaceAll(
+    "<",
+    "&lt;"
+  )
+
+  .replaceAll(
+    ">",
+    "&gt;"
+  )
+
+  .replaceAll(
+    '"',
+    "&quot;"
+  )
+
+  .replaceAll(
+    "'",
+    "&#039;"
+  );
+
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+function showMessage(
+  text,
+  type
+){
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+
+  message.textContent =
+    text;
+
+
+  message.className =
+    "message " +
+    type;
+
+
+  setTimeout(
+
+    () => {
+
+      message.className =
+        "message";
+
+    },
+
+    4000
+
+  );
+
+}
+
+</script>
+
+</body>
+
+</html>
