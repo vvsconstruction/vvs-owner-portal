@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VVS Construction | Owner Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+body{
+display:flex;justify-content:center;align-items:center;
+height:100vh;
+background:linear-gradient(rgba(6,25,55,.75),rgba(6,25,55,.75)),url('assets/images/background.jpg');
+background-size:cover;background-position:center;
+}
+.card{
+width:390px;
+background:rgba(255,255,255,.12);
+backdrop-filter:blur(16px);
+padding:35px;
+border-radius:20px;
+color:#fff;
+box-shadow:0 20px 50px rgba(0,0,0,.35);
+}
+.logo{
+width:90px;height:90px;border-radius:50%;
+background:#FFD700;color:#0b2545;
+display:flex;justify-content:center;align-items:center;
+margin:auto;font-size:30px;font-weight:700;
+}
+h2{text-align:center;color:#FFD700;margin:18px 0 6px}
+p{text-align:center;color:#ddd;margin-bottom:25px}
+label{display:block;margin:12px 0 6px}
+input{
+width:100%;padding:14px;border:none;border-radius:10px;
+background:rgba(255,255,255,.15);color:#fff;outline:none;
+}
+input::placeholder{color:#ddd}
+.row{display:flex;justify-content:space-between;align-items:center;margin:15px 0;font-size:14px}
+button{
+width:100%;padding:14px;border:none;border-radius:10px;
+background:#FFD700;color:#0b2545;font-size:16px;font-weight:700;cursor:pointer;
+}
+button:hover{background:#ffca00}
+.footer{text-align:center;margin-top:20px;color:#ddd;font-size:12px}
+  #loader{
+display:none;
+margin-left:8px;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
+}
+  button{
+transition:.25s;
+}
+
+button:active{
+transform:scale(.98);
+}
+  
+  input:focus{
+border:2px solid #FFD700;
+box-shadow:0 0 15px rgba(255,215,0,.4);
+}
+
+button{
+transition:.3s;
+}
+
+button:hover{
+transform:translateY(-2px);
+box-shadow:0 8px 20px rgba(255,215,0,.35);
+}
+  
+</style>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  setPersistence,
+  browserLocalPersistence,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDQGsKaMXv-y7RadDHZBBHk1QDEWYuMt34",
+  authDomain: "vvs-construction.firebaseapp.com",
+  projectId: "vvs-construction",
+  storageBucket: "vvs-construction.firebasestorage.app",
+  messagingSenderId: "997782914494",
+  appId: "1:997782914494:web:30e188d05e1607780fe5ef"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+
+/* ================================
+   CHECK EXISTING LOGIN
+================================ */
+
+onAuthStateChanged(auth, (user) => {
+
+  if (user) {
+    window.location.href = "owner-dashboard.html";
+  }
+
+});
+
+
+/* ================================
+   LOGIN
+================================ */
+
+window.login = async function () {
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  const btn =
+    document.getElementById("btn");
+
+  const btnText =
+    document.getElementById("btnText");
+
+  const loader =
+    document.getElementById("loader");
+
+
+  /* Validation */
+
+  if (!email || !password) {
+
+    alert("Enter email and password.");
+
+    return;
+  }
+
+
+  /* Loading */
+
+  btn.disabled = true;
+
+  btnText.textContent = "Signing In...";
+
+  loader.style.display = "inline";
+
+
+  try {
+
+    await setPersistence(
+      auth,
+      browserLocalPersistence
+    );
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+
+    /* Success */
+
+    btnText.textContent = "Success ✓";
+
+    loader.style.display = "none";
+
+
+    setTimeout(() => {
+
+      window.location.href =
+        "owner-dashboard.html";
+
+    }, 500);
+
+
+  } catch (e) {
+
+    console.error("Login error:", e);
+
+
+    switch (e.code) {
+
+      case "auth/invalid-credential":
+
+        alert(
+          "Invalid email or password."
+        );
+
+        break;
+
+
+      case "auth/invalid-email":
+
+        alert(
+          "Please enter a valid email address."
+        );
+
+        break;
+
+
+      case "auth/user-disabled":
+
+        alert(
+          "This owner account has been disabled."
+        );
+
+        break;
+
+
+      case "auth/too-many-requests":
+
+        alert(
+          "Too many login attempts. Please try again later."
+        );
+
+        break;
+
+
+      case "auth/network-request-failed":
+
+        alert(
+          "No internet connection."
+        );
+
+        break;
+
+
+      default:
+
+        alert(
+          "Login failed: " + e.message
+        );
+
+    }
+
+
+    /* Reset button */
+
+    btn.disabled = false;
+
+    btnText.textContent = "LOGIN";
+
+    loader.style.display = "none";
+
+  }
+
+};
+
+
+/* ================================
+   SHOW / HIDE PASSWORD
+================================ */
+
+window.togglePassword = function () {
+
+  const password =
+    document.getElementById("password");
+
+  password.type =
+    password.type === "password"
+      ? "text"
+      : "password";
+
+};
+
+
+/* ================================
+   ENTER KEY LOGIN
+================================ */
+
+document.addEventListener("keydown", (e) => {
+
+  if (
+    e.key === "Enter" &&
+    !document.getElementById("btn").disabled
+  ) {
+
+    window.login();
+
+  }
+
+});
+
+</script>
+</head>
+
+<body>
+<div class="card">
+<div class="logo">VVS</div>
+<h2>OWNER LOGIN</h2>
+<p>VVS Construction Workforce Management</p>
+
+<label>Email</label>
+<input id="email" type="email" placeholder="mathan@vvs.com">
+
+<label>Password</label>
+<input id="password" type="password" placeholder="Enter Password">
+
+<div class="row">
+<label style="display:flex;align-items:center;gap:8px;">
+<input type="checkbox" style="width:auto;" onclick="togglePassword()">
+<span>Show Password</span>
+</label>
+</div>
+
+<button id="btn" onclick="login()">
+<span id="btnText">LOGIN</span>
+<span id="loader" style="display:none;">🔄</span>
+</button>
+
+<div class="footer">
+VVS Construction Workforce Suite<br>
+Version 1.0
+</div>
+</div>
+</body>
+</html>
