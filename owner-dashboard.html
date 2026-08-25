@@ -1,0 +1,2625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1.0"
+>
+
+<title>VVS Construction | Owner Dashboard</title>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+  rel="stylesheet"
+>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Poppins,sans-serif;
+}
+
+body{
+  background:#eef4fb;
+  color:#0b2545;
+  padding-bottom:90px;
+}
+
+button{
+  font-family:Poppins,sans-serif;
+  cursor:pointer;
+}
+
+.header{
+  background:linear-gradient(135deg,#082a59,#114d9a);
+  color:white;
+  padding:18px;
+  box-shadow:0 8px 25px rgba(0,0,0,.18);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.headerTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.headerLeft{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logoCircle{
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  background:#FFD700;
+  color:#082a59;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:20px;
+  font-weight:700;
+}
+
+.headerTitle h2{
+  font-size:20px;
+}
+
+.headerTitle small{
+  opacity:.8;
+}
+
+.headerActions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.notify{
+  width:40px;
+  height:40px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  background:rgba(255,255,255,.12);
+  font-size:20px;
+}
+
+.logoutBtn{
+  background:#FFD700;
+  color:#082a59;
+  border:none;
+  padding:9px 13px;
+  border-radius:9px;
+  font-weight:700;
+}
+
+.welcome{
+  margin-top:18px;
+}
+
+.welcome h1{
+  font-size:26px;
+}
+
+.welcome p{
+  margin-top:4px;
+  opacity:.85;
+  font-size:14px;
+}
+
+.timeCard{
+  margin-top:16px;
+  background:rgba(255,255,255,.13);
+  backdrop-filter:blur(10px);
+  padding:14px;
+  border-radius:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.timeCard h3{
+  font-size:17px;
+}
+
+.timeCard small{
+  opacity:.8;
+}
+
+.timeIcon{
+  font-size:35px;
+}
+
+.container{
+  padding:18px;
+  max-width:1400px;
+  margin:auto;
+}
+
+.summary{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:12px;
+  margin-top:-5px;
+}
+
+.summaryBox{
+  background:white;
+  padding:16px;
+  border-radius:16px;
+  box-shadow:0 7px 18px rgba(0,0,0,.07);
+}
+
+.summaryBox p{
+  font-size:12px;
+  color:#777;
+}
+
+.summaryBox strong{
+  display:block;
+  font-size:26px;
+  margin-top:5px;
+}
+
+.blue{color:#2563eb}
+.green{color:#16a34a}
+.red{color:#dc2626}
+.orange{color:#ea580c}
+.purple{color:#7c3aed}
+
+.section{
+  margin-top:18px;
+  background:white;
+  padding:18px;
+  border-radius:18px;
+  box-shadow:0 8px 22px rgba(0,0,0,.08);
+}
+
+.sectionTitle{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
+}
+
+.sectionTitle h3{
+  color:#082a59;
+  font-size:17px;
+}
+
+.viewBtn{
+  border:none;
+  background:#eef4fb;
+  color:#2563eb;
+  padding:7px 10px;
+  border-radius:8px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.quickGrid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
+}
+
+.quickBtn{
+  border:none;
+  background:#0b2545;
+  color:white;
+  padding:14px 8px;
+  border-radius:14px;
+  font-size:12px;
+  font-weight:600;
+  transition:.2s;
+}
+
+.quickBtn:hover{
+  transform:translateY(-3px);
+  background:#114d9a;
+}
+
+.quickBtn span{
+  display:block;
+  font-size:25px;
+  margin-bottom:5px;
+}
+
+.chartBox{
+  width:100%;
+  height:250px;
+  position:relative;
+}
+
+.chartBoxSmall{
+  width:100%;
+  height:260px;
+  position:relative;
+}
+
+.twoColumns{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.projectItem{
+  margin-bottom:18px;
+}
+
+.projectHeader{
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+  font-weight:600;
+  gap:10px;
+}
+
+.progressPercent{
+  color:#2563eb;
+  white-space:nowrap;
+}
+
+.progressBar{
+  height:11px;
+  background:#e5e7eb;
+  border-radius:50px;
+  overflow:hidden;
+  margin-top:7px;
+}
+
+.progressFill{
+  height:100%;
+  background:linear-gradient(90deg,#2563eb,#0ea5e9);
+  border-radius:50px;
+  transition:width .5s ease;
+}
+
+.workerList{
+  display:flex;
+  flex-direction:column;
+}
+
+.worker{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 0;
+  border-bottom:1px solid #edf0f4;
+}
+
+.worker:last-child{
+  border-bottom:none;
+}
+
+.workerAvatar{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#e8f0ff;
+  color:#2563eb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+}
+
+.workerInfo{
+  flex:1;
+}
+
+.workerInfo strong{
+  display:block;
+  font-size:14px;
+}
+
+.workerInfo small{
+  color:#777;
+}
+
+.workerBadge{
+  font-size:11px;
+  padding:5px 8px;
+  border-radius:8px;
+  background:#dcfce7;
+  color:#166534;
+  font-weight:600;
+}
+
+.weatherCard{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:linear-gradient(135deg,#eef7ff,#f8fbff);
+  padding:18px;
+  border-radius:15px;
+}
+
+.weatherTemp{
+  font-size:38px;
+  font-weight:700;
+  color:#082a59;
+}
+
+.weatherCondition{
+  color:#555;
+  font-size:14px;
+}
+
+.weatherLocation{
+  color:#777;
+  font-size:12px;
+  margin-top:3px;
+}
+
+.weatherIcon{
+  font-size:55px;
+}
+
+.activity{
+  display:flex;
+  gap:12px;
+  padding:12px 0;
+  border-bottom:1px solid #edf0f4;
+}
+
+.activity:last-child{
+  border-bottom:none;
+}
+
+.activityIcon{
+  width:38px;
+  height:38px;
+  border-radius:10px;
+  background:#eef4fb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.activityText strong{
+  display:block;
+  font-size:13px;
+}
+
+.activityText small{
+  color:#777;
+}
+
+.empty{
+  padding:20px;
+  text-align:center;
+  color:#777;
+  font-size:13px;
+}
+
+.errorBox{
+  background:#fee2e2;
+  color:#991b1b;
+  padding:12px;
+  border-radius:10px;
+  font-size:13px;
+  margin-top:10px;
+}
+
+.bottomNav{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  background:white;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 0;
+  box-shadow:0 -5px 20px rgba(0,0,0,.12);
+  z-index:2000;
+}
+
+.bottomNav a{
+  text-decoration:none;
+  color:#0b2545;
+  text-align:center;
+  font-size:12px;
+  font-weight:600;
+}
+
+.bottomNav a.active{
+  color:#2563eb;
+}
+
+@media(max-width:1100px){
+
+  .summary{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+}
+
+@media(max-width:800px){
+
+  .twoColumns{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:600px){
+
+  body{
+    padding-bottom:80px;
+  }
+
+  .header{
+    padding:14px;
+  }
+
+  .headerTitle h2{
+    font-size:17px;
+  }
+
+  .headerTitle small{
+    font-size:10px;
+  }
+
+  .logoCircle{
+    width:40px;
+    height:40px;
+    font-size:18px;
+  }
+
+  .logoutBtn{
+    padding:8px 9px;
+    font-size:11px;
+  }
+
+  .notify{
+    display:none;
+  }
+
+  .welcome h1{
+    font-size:22px;
+  }
+
+  .container{
+    padding:12px;
+  }
+
+  .summary{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .summaryBox strong{
+    font-size:22px;
+  }
+
+  .quickGrid{
+    grid-template-columns:repeat(5,1fr);
+    gap:7px;
+  }
+
+  .quickBtn{
+    padding:10px 4px;
+    font-size:9px;
+  }
+
+  .quickBtn span{
+    font-size:21px;
+  }
+
+  .section{
+    padding:15px;
+  }
+
+  .chartBox{
+    height:220px;
+  }
+
+}
+
+@media(min-width:768px){
+
+  .bottomNav{
+    display:none;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+  <div class="headerTop">
+
+    <div class="headerLeft">
+
+      <div class="logoCircle">
+        V
+      </div>
+
+      <div class="headerTitle">
+
+        <h2>
+          VVS Construction
+        </h2>
+
+        <small>
+          Owner Dashboard
+        </small>
+
+      </div>
+
+    </div>
+
+    <div class="headerActions">
+
+      <div class="notify">
+        🔔
+      </div>
+
+      <button
+        class="logoutBtn"
+        onclick="logout()"
+      >
+        Logout
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="welcome">
+
+    <h1>
+      Welcome Back 👋
+    </h1>
+
+    <p>
+      Manage your construction workforce efficiently
+    </p>
+
+  </div>
+
+  <div class="timeCard">
+
+    <div>
+
+      <h3 id="todayDate">
+        Loading...
+      </h3>
+
+      <small>
+        Current Date & Time
+      </small>
+
+    </div>
+
+    <div class="timeIcon">
+      📅
+    </div>
+
+  </div>
+
+</header>
+
+
+<div class="container">
+
+
+<!-- SUMMARY -->
+
+<div class="summary">
+
+  <div class="summaryBox">
+    <p>Total Workers</p>
+    <strong
+      id="workers"
+      class="blue"
+    >
+      0
+    </strong>
+  </div>
+
+  <div class="summaryBox">
+    <p>Present Today</p>
+    <strong
+      id="present"
+      class="green"
+    >
+      0
+    </strong>
+  </div>
+
+  <div class="summaryBox">
+    <p>Absent Today</p>
+    <strong
+      id="absent"
+      class="red"
+    >
+      0
+    </strong>
+  </div>
+
+  <div class="summaryBox">
+    <p>Projects</p>
+    <strong
+      id="projects"
+      class="orange"
+    >
+      0
+    </strong>
+  </div>
+
+  <div class="summaryBox">
+    <p>Payroll</p>
+    <strong
+      id="payroll"
+      class="purple"
+    >
+      ₹0
+    </strong>
+  </div>
+
+  <div class="summaryBox">
+    <p>Attendance</p>
+    <strong
+      id="attendancePercent"
+      class="blue"
+    >
+      0%
+    </strong>
+  </div>
+
+</div>
+
+
+<!-- QUICK ACTIONS -->
+
+<div class="section">
+
+  <div class="sectionTitle">
+
+    <h3>
+      ⚡ Quick Actions
+    </h3>
+
+  </div>
+
+  <div class="quickGrid">
+
+    <button
+      class="quickBtn"
+      onclick="location.href='workers.html'"
+    >
+      <span>👷</span>
+      Workers
+    </button>
+
+    <button
+      class="quickBtn"
+      onclick="location.href='attendance.html'"
+    >
+      <span>📅</span>
+      Attendance
+    </button>
+
+    <button
+      class="quickBtn"
+      onclick="location.href='payroll.html'"
+    >
+      <span>💰</span>
+      Payroll
+    </button>
+
+    <button
+      class="quickBtn"
+      onclick="location.href='projects.html'"
+    >
+      <span>📁</span>
+      Projects
+    </button>
+
+    <button
+      class="quickBtn"
+      onclick="location.href='reports.html'"
+    >
+      <span>📈</span>
+      Reports
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ATTENDANCE -->
+
+<div class="section">
+
+  <div class="sectionTitle">
+
+    <h3>
+      📈 Attendance Overview
+    </h3>
+
+    <button
+      class="viewBtn"
+      onclick="location.href='attendance.html'"
+    >
+      View
+    </button>
+
+  </div>
+
+  <div class="chartBox">
+
+    <canvas
+      id="attendanceChart"
+    ></canvas>
+
+  </div>
+
+</div>
+
+
+<!-- CATEGORY + WEATHER -->
+
+<div class="twoColumns">
+
+
+  <div class="section">
+
+    <div class="sectionTitle">
+
+      <h3>
+        👷 Worker Categories
+      </h3>
+
+    </div>
+
+    <div class="chartBoxSmall">
+
+      <canvas
+        id="categoryChart"
+      ></canvas>
+
+    </div>
+
+  </div>
+
+
+  <div class="section">
+
+    <div class="sectionTitle">
+
+      <h3>
+        🌤 Weather
+      </h3>
+
+    </div>
+
+    <div class="weatherCard">
+
+      <div>
+
+        <div
+          class="weatherTemp"
+          id="weatherTemp"
+        >
+          --°
+        </div>
+
+        <div
+          class="weatherCondition"
+          id="weatherCondition"
+        >
+          Loading...
+        </div>
+
+        <div class="weatherLocation">
+          Koodankulam, Tamil Nadu
+        </div>
+
+      </div>
+
+      <div
+        class="weatherIcon"
+        id="weatherIcon"
+      >
+        🌤️
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- PROJECT PROGRESS -->
+
+<div class="section">
+
+  <div class="sectionTitle">
+
+    <h3>
+      🚧 Project Progress
+    </h3>
+
+    <button
+      class="viewBtn"
+      onclick="location.href='projects.html'"
+    >
+      Projects
+    </button>
+
+  </div>
+
+  <div id="projectProgress">
+
+    <div class="empty">
+      Loading projects...
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- RECENT WORKERS -->
+
+<div class="section">
+
+  <div class="sectionTitle">
+
+    <h3>
+      👷 Recent Workers
+    </h3>
+
+    <button
+      class="viewBtn"
+      onclick="location.href='workers.html'"
+    >
+      View All
+    </button>
+
+  </div>
+
+  <div
+    id="workerList"
+    class="workerList"
+  >
+
+    <div class="empty">
+      Loading workers...
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ACTIVITY -->
+
+<div class="section">
+
+  <div class="sectionTitle">
+
+    <h3>
+      📝 Recent Activity
+    </h3>
+
+  </div>
+
+  <div id="activityList">
+
+    <div class="empty">
+      Loading activity...
+    </div>
+
+  </div>
+
+</div>
+
+
+<div id="firebaseError"></div>
+
+</div>
+
+
+<!-- BOTTOM NAV -->
+
+<div class="bottomNav">
+
+  <a
+    href="dashboard.html"
+    class="active"
+  >
+    🏠<br>
+    Home
+  </a>
+
+  <a href="workers.html">
+    👷<br>
+    Workers
+  </a>
+
+  <a href="attendance.html">
+    📅<br>
+    Attendance
+  </a>
+
+  <a href="payroll.html">
+    💰<br>
+    Payroll
+  </a>
+
+  <a href="projects.html">
+    📁<br>
+    Projects
+  </a>
+
+</div>
+
+
+<script type="module">
+
+/* ========================================
+   FIREBASE IMPORTS
+======================================== */
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+
+/* ========================================
+   FIREBASE CONFIG
+======================================== */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyDQGsKaMXv-y7RadDHZBBHk1QDEWYuMt34",
+
+  authDomain:
+    "vvs-construction.firebaseapp.com",
+
+  projectId:
+    "vvs-construction",
+
+  storageBucket:
+    "vvs-construction.firebasestorage.app",
+
+  messagingSenderId:
+    "997782914494",
+
+  appId:
+    "1:997782914494:web:30e188d05e1607780fe5ef"
+
+};
+
+
+const app =
+  initializeApp(firebaseConfig);
+
+const db =
+  getFirestore(app);
+
+const auth =
+  getAuth(app);
+
+
+/* ========================================
+   GLOBAL VARIABLES
+======================================== */
+
+let attendanceChart = null;
+
+let categoryChart = null;
+
+let listenersStarted = false;
+
+
+/* ========================================
+   AUTHENTICATION
+======================================== */
+
+onAuthStateChanged(
+  auth,
+  user => {
+
+    console.log(
+      "Auth state changed:",
+      user
+        ? "SIGNED IN"
+        : "SIGNED OUT"
+    );
+
+
+    if (!user) {
+
+      window.location.href =
+        "owner-login.html";
+
+      return;
+
+    }
+
+
+    console.log(
+      "Owner authenticated:",
+      user.uid,
+      user.email || ""
+    );
+
+
+    /*
+      IMPORTANT:
+
+      Firestore listeners are started
+      ONLY after Firebase confirms that
+      the user is authenticated.
+    */
+
+    if (
+      !listenersStarted
+    ) {
+
+      listenersStarted = true;
+
+      startFirestoreListeners();
+
+    }
+
+  }
+);
+
+
+/* ========================================
+   LOGOUT
+======================================== */
+
+window.logout =
+async function(){
+
+  try{
+
+    await signOut(auth);
+
+    window.location.href =
+      "owner-login.html";
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Logout error:",
+      error
+    );
+
+    alert(
+      "Unable to logout."
+    );
+
+  }
+
+};
+
+
+/* ========================================
+   DATE
+======================================== */
+
+function getLocalDate(){
+
+  const d =
+    new Date();
+
+
+  return [
+
+    d.getFullYear(),
+
+    String(
+      d.getMonth() + 1
+    ).padStart(
+      2,
+      "0"
+    ),
+
+    String(
+      d.getDate()
+    ).padStart(
+      2,
+      "0"
+    )
+
+  ].join("-");
+
+}
+
+
+/* ========================================
+   CLOCK
+======================================== */
+
+function updateClock(){
+
+  const element =
+    document.getElementById(
+      "todayDate"
+    );
+
+
+  element.textContent =
+    new Date().toLocaleString(
+      "en-IN",
+      {
+        dateStyle:
+          "medium",
+
+        timeStyle:
+          "medium"
+      }
+    );
+
+}
+
+
+updateClock();
+
+
+setInterval(
+  updateClock,
+  1000
+);
+
+
+/* ========================================
+   ERROR DISPLAY
+======================================== */
+
+function showFirebaseError(
+  title,
+  error
+){
+
+  console.error(
+    title,
+    error
+  );
+
+
+  const box =
+    document.getElementById(
+      "firebaseError"
+    );
+
+
+  box.innerHTML = `
+
+    <div class="errorBox">
+
+      ⚠️
+      ${escapeHTML(title)}
+
+      <br>
+
+      <small>
+
+        ${escapeHTML(
+          error?.message ||
+          "Check Firebase authentication and Firestore rules."
+        )}
+
+      </small>
+
+    </div>
+
+  `;
+
+}
+
+
+/* ========================================
+   START FIRESTORE LISTENERS
+======================================== */
+
+function startFirestoreListeners(){
+
+  console.log(
+    "Starting Firestore listeners..."
+  );
+
+
+  loadWorkers();
+
+  loadProjects();
+
+  loadAttendance();
+
+  loadPayroll();
+
+}
+
+
+/* ========================================
+   WORKERS
+======================================== */
+
+function loadWorkers(){
+
+  onSnapshot(
+
+    collection(
+      db,
+      "workers"
+    ),
+
+    snap => {
+
+      const workers = [];
+
+
+      snap.forEach(
+        doc => {
+
+          workers.push({
+
+            id:
+              doc.id,
+
+            ...doc.data()
+
+          });
+
+        }
+      );
+
+
+      console.log(
+        "Workers loaded:",
+        workers.length
+      );
+
+
+      document.getElementById(
+        "workers"
+      ).textContent =
+        workers.length;
+
+
+      updateWorkerList(
+        workers
+      );
+
+
+      updateCategoryChart(
+        workers
+      );
+
+    },
+
+    error => {
+
+      showFirebaseError(
+        "Workers could not be loaded.",
+        error
+      );
+
+    }
+
+  );
+
+}
+
+
+/* ========================================
+   PROJECTS
+======================================== */
+
+function loadProjects(){
+
+  onSnapshot(
+
+    collection(
+      db,
+      "projects"
+    ),
+
+    snap => {
+
+      const projects = [];
+
+
+      snap.forEach(
+        doc => {
+
+          projects.push({
+
+            id:
+              doc.id,
+
+            ...doc.data()
+
+          });
+
+        }
+      );
+
+
+      console.log(
+        "Projects loaded:",
+        projects.length
+      );
+
+
+      document.getElementById(
+        "projects"
+      ).textContent =
+        projects.length;
+
+
+      updateProjectProgress(
+        projects
+      );
+
+    },
+
+    error => {
+
+      showFirebaseError(
+        "Projects could not be loaded.",
+        error
+      );
+
+    }
+
+  );
+
+}
+
+
+/* ========================================
+   ATTENDANCE
+======================================== */
+
+function loadAttendance(){
+
+  onSnapshot(
+
+    collection(
+      db,
+      "attendance"
+    ),
+
+    snap => {
+
+      const today =
+        getLocalDate();
+
+
+      let present = 0;
+
+      let absent = 0;
+
+
+      const dailyAttendance = {};
+
+
+      snap.forEach(
+        doc => {
+
+          const data =
+            doc.data();
+
+
+          const date =
+            data.date;
+
+
+          let isPresent =
+            false;
+
+
+          let isAbsent =
+            false;
+
+
+          const status =
+            String(
+              data.status || ""
+            ).toLowerCase();
+
+
+          if(
+            status ===
+            "present"
+          ){
+
+            isPresent =
+              true;
+
+          }
+
+          else if(
+            status ===
+            "absent"
+          ){
+
+            isAbsent =
+              true;
+
+          }
+
+          else if(
+            data.present ===
+            true
+          ){
+
+            isPresent =
+              true;
+
+          }
+
+          else if(
+            data.present ===
+            false
+          ){
+
+            isAbsent =
+              true;
+
+          }
+
+
+          if(
+            date ===
+            today
+          ){
+
+            if(
+              isPresent
+            ){
+
+              present++;
+
+            }
+
+            else if(
+              isAbsent
+            ){
+
+              absent++;
+
+            }
+
+          }
+
+
+          if(
+            date &&
+            isPresent
+          ){
+
+            dailyAttendance[date] =
+              (
+                dailyAttendance[date] ||
+                0
+              ) + 1;
+
+          }
+
+        }
+      );
+
+
+      document.getElementById(
+        "present"
+      ).textContent =
+        present;
+
+
+      document.getElementById(
+        "absent"
+      ).textContent =
+        absent;
+
+
+      const total =
+        present + absent;
+
+
+      document.getElementById(
+        "attendancePercent"
+      ).textContent =
+
+        total > 0
+
+        ? (
+            present /
+            total *
+            100
+          ).toFixed(1)
+          + "%"
+
+        : "0%";
+
+
+      updateAttendanceChart(
+        dailyAttendance
+      );
+
+
+      updateActivity(
+        present,
+        absent
+      );
+
+    },
+
+    error => {
+
+      showFirebaseError(
+        "Attendance could not be loaded.",
+        error
+      );
+
+    }
+
+  );
+
+}
+
+
+/* ========================================
+   PAYROLL
+======================================== */
+
+function loadPayroll(){
+
+  onSnapshot(
+
+    collection(
+      db,
+      "payroll"
+    ),
+
+    snap => {
+
+      let total = 0;
+
+
+      snap.forEach(
+        doc => {
+
+          const data =
+            doc.data();
+
+
+          const amount =
+            Number(
+              data.amount ??
+              data.total ??
+              data.wage ??
+              0
+            );
+
+
+          if(
+            Number.isFinite(
+              amount
+            )
+          ){
+
+            total +=
+              amount;
+
+          }
+
+        }
+      );
+
+
+      document.getElementById(
+        "payroll"
+      ).textContent =
+        "₹" +
+        total.toLocaleString(
+          "en-IN"
+        );
+
+    },
+
+    error => {
+
+      showFirebaseError(
+        "Payroll could not be loaded.",
+        error
+      );
+
+    }
+
+  );
+
+}
+
+
+/* ========================================
+   ATTENDANCE CHART
+======================================== */
+
+function updateAttendanceChart(
+  dailyAttendance
+){
+
+  const canvas =
+    document.getElementById(
+      "attendanceChart"
+    );
+
+
+  const labels = [];
+
+  const values = [];
+
+
+  for(
+    let i = 6;
+    i >= 0;
+    i--
+  ){
+
+    const date =
+      new Date();
+
+
+    date.setDate(
+      date.getDate() - i
+    );
+
+
+    const key =
+      date.getFullYear()
+      + "-"
+      + String(
+          date.getMonth() + 1
+        ).padStart(
+          2,
+          "0"
+        )
+      + "-"
+      + String(
+          date.getDate()
+        ).padStart(
+          2,
+          "0"
+        );
+
+
+    labels.push(
+      date.toLocaleDateString(
+        "en-IN",
+        {
+          weekday:
+            "short"
+        }
+      )
+    );
+
+
+    values.push(
+      dailyAttendance[key] || 0
+    );
+
+  }
+
+
+  if(
+    attendanceChart
+  ){
+
+    attendanceChart.destroy();
+
+  }
+
+
+  attendanceChart =
+    new Chart(
+      canvas,
+      {
+
+        type:
+          "line",
+
+        data: {
+
+          labels,
+
+          datasets: [{
+
+            label:
+              "Present Workers",
+
+            data:
+              values,
+
+            borderColor:
+              "#2563eb",
+
+            backgroundColor:
+              "rgba(37,99,235,.12)",
+
+            fill:
+              true,
+
+            tension:
+              .4,
+
+            borderWidth:
+              3,
+
+            pointRadius:
+              4,
+
+            pointHoverRadius:
+              6
+
+          }]
+
+        },
+
+        options: {
+
+          responsive:
+            true,
+
+          maintainAspectRatio:
+            false,
+
+          interaction: {
+
+            intersect:
+              false,
+
+            mode:
+              "index"
+
+          },
+
+          scales: {
+
+            y: {
+
+              beginAtZero:
+                true,
+
+              ticks: {
+
+                precision:
+                  0
+
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+    );
+
+}
+
+
+/* ========================================
+   CATEGORY CHART
+======================================== */
+
+function updateCategoryChart(
+  workers
+){
+
+  const canvas =
+    document.getElementById(
+      "categoryChart"
+    );
+
+
+  const categories = {};
+
+
+  workers.forEach(
+    worker => {
+
+      const category =
+        worker.category ||
+        worker.type ||
+        "Other";
+
+
+      categories[category] =
+        (
+          categories[category] ||
+          0
+        ) + 1;
+
+    }
+  );
+
+
+  const labels =
+    Object.keys(
+      categories
+    );
+
+
+  const values =
+    Object.values(
+      categories
+    );
+
+
+  if(
+    categoryChart
+  ){
+
+    categoryChart.destroy();
+
+    categoryChart =
+      null;
+
+  }
+
+
+  if(
+    values.length === 0
+  ){
+
+    return;
+
+  }
+
+
+  categoryChart =
+    new Chart(
+      canvas,
+      {
+
+        type:
+          "doughnut",
+
+        data: {
+
+          labels,
+
+          datasets: [{
+
+            label:
+              "Workers",
+
+            data:
+              values
+
+          }]
+
+        },
+
+        options: {
+
+          responsive:
+            true,
+
+          maintainAspectRatio:
+            false,
+
+          cutout:
+            "62%",
+
+          plugins: {
+
+            legend: {
+
+              position:
+                "bottom"
+
+            }
+
+          }
+
+        }
+
+      }
+    );
+
+}
+
+
+/* ========================================
+   WORKER LIST
+======================================== */
+
+function updateWorkerList(
+  workers
+){
+
+  const list =
+    document.getElementById(
+      "workerList"
+    );
+
+
+  list.innerHTML =
+    "";
+
+
+  if(
+    workers.length === 0
+  ){
+
+    list.innerHTML = `
+
+      <div class="empty">
+
+        No workers found.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  workers
+    .slice(0,6)
+    .forEach(
+      worker => {
+
+        const name =
+          worker.name ||
+          worker.workerName ||
+          "Unnamed Worker";
+
+
+        const category =
+          worker.category ||
+          worker.type ||
+          "Worker";
+
+
+        const initial =
+          name
+            .trim()
+            .charAt(0)
+            .toUpperCase();
+
+
+        list.innerHTML += `
+
+          <div class="worker">
+
+            <div class="workerAvatar">
+
+              ${escapeHTML(
+                initial
+              )}
+
+            </div>
+
+            <div class="workerInfo">
+
+              <strong>
+
+                ${escapeHTML(
+                  name
+                )}
+
+              </strong>
+
+              <small>
+
+                ${escapeHTML(
+                  category
+                )}
+
+              </small>
+
+            </div>
+
+            <div class="workerBadge">
+
+              Active
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+    );
+
+}
+
+
+/* ========================================
+   PROJECT PROGRESS
+======================================== */
+
+function updateProjectProgress(
+  projects
+){
+
+  const container =
+    document.getElementById(
+      "projectProgress"
+    );
+
+
+  container.innerHTML =
+    "";
+
+
+  if(
+    projects.length === 0
+  ){
+
+    container.innerHTML = `
+
+      <div class="empty">
+
+        No projects found.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  projects
+    .slice(0,8)
+    .forEach(
+      project => {
+
+        const name =
+          project.projectName ||
+          project.name ||
+          "Unnamed Project";
+
+
+        let progress =
+          Number(
+            project.progress ??
+            project.percentage ??
+            0
+          );
+
+
+        /*
+          Only derive progress from status
+          when neither progress nor
+          percentage exists.
+        */
+
+        if(
+          project.progress == null &&
+          project.percentage == null
+        ){
+
+          const status =
+            String(
+              project.status ||
+              ""
+            ).toLowerCase();
+
+
+          if(
+            status ===
+            "completed"
+          ){
+
+            progress =
+              100;
+
+          }
+
+          else if(
+            status ===
+            "in progress"
+          ){
+
+            progress =
+              50;
+
+          }
+
+          else if(
+            status ===
+            "on hold"
+          ){
+
+            progress =
+              0;
+
+          }
+
+          else{
+
+            progress =
+              10;
+
+          }
+
+        }
+
+
+        progress =
+          Math.max(
+            0,
+            Math.min(
+              100,
+              progress
+            )
+          );
+
+
+        container.innerHTML += `
+
+          <div class="projectItem">
+
+            <div class="projectHeader">
+
+              <span>
+
+                ${escapeHTML(
+                  name
+                )}
+
+              </span>
+
+              <span
+                class="progressPercent"
+              >
+
+                ${progress}%
+
+              </span>
+
+            </div>
+
+            <div class="progressBar">
+
+              <div
+                class="progressFill"
+                style="width:${progress}%"
+              ></div>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+    );
+
+}
+
+
+/* ========================================
+   ACTIVITY
+======================================== */
+
+function updateActivity(
+  present,
+  absent
+){
+
+  const list =
+    document.getElementById(
+      "activityList"
+    );
+
+
+  list.innerHTML = `
+
+    <div class="activity">
+
+      <div class="activityIcon">
+        📅
+      </div>
+
+      <div class="activityText">
+
+        <strong>
+          Attendance Updated
+        </strong>
+
+        <small>
+
+          ${present}
+          present •
+
+          ${absent}
+          absent today
+
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="activity">
+
+      <div class="activityIcon">
+        👷
+      </div>
+
+      <div class="activityText">
+
+        <strong>
+          Workforce Dashboard
+        </strong>
+
+        <small>
+
+          Worker information
+          synchronized with Firebase
+
+        </small>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* ========================================
+   WEATHER
+======================================== */
+
+async function updateWeather(){
+
+  const temp =
+    document.getElementById(
+      "weatherTemp"
+    );
+
+
+  const condition =
+    document.getElementById(
+      "weatherCondition"
+    );
+
+
+  const icon =
+    document.getElementById(
+      "weatherIcon"
+    );
+
+
+  try{
+
+    const latitude =
+      8.1700;
+
+
+    const longitude =
+      77.7100;
+
+
+    const url =
+      "https://api.open-meteo.com/v1/forecast"
+      + "?latitude=" + latitude
+      + "&longitude=" + longitude
+      + "&current=temperature_2m,weather_code"
+      + "&timezone=Asia%2FKolkata";
+
+
+    const response =
+      await fetch(url);
+
+
+    if(
+      !response.ok
+    ){
+
+      throw new Error(
+        "Weather request failed"
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    const current =
+      data.current;
+
+
+    temp.textContent =
+      Math.round(
+        current.temperature_2m
+      ) + "°C";
+
+
+    const weather =
+      getWeatherDescription(
+        current.weather_code
+      );
+
+
+    condition.textContent =
+      weather.text;
+
+
+    icon.textContent =
+      weather.icon;
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Weather error:",
+      error
+    );
+
+
+    temp.textContent =
+      "--°";
+
+
+    condition.textContent =
+      "Weather unavailable";
+
+
+    icon.textContent =
+      "🌤️";
+
+  }
+
+}
+
+
+/* ========================================
+   WEATHER DESCRIPTION
+======================================== */
+
+function getWeatherDescription(
+  code
+){
+
+  const map = {
+
+    0:{
+      text:
+        "Clear sky",
+      icon:
+        "☀️"
+    },
+
+    1:{
+      text:
+        "Mainly clear",
+      icon:
+        "🌤️"
+    },
+
+    2:{
+      text:
+        "Partly cloudy",
+      icon:
+        "⛅"
+    },
+
+    3:{
+      text:
+        "Overcast",
+      icon:
+        "☁️"
+    },
+
+    45:{
+      text:
+        "Fog",
+      icon:
+        "🌫️"
+    },
+
+    48:{
+      text:
+        "Fog",
+      icon:
+        "🌫️"
+    },
+
+    51:{
+      text:
+        "Light drizzle",
+      icon:
+        "🌦️"
+    },
+
+    53:{
+      text:
+        "Drizzle",
+      icon:
+        "🌦️"
+    },
+
+    55:{
+      text:
+        "Heavy drizzle",
+      icon:
+        "🌧️"
+    },
+
+    61:{
+      text:
+        "Light rain",
+      icon:
+        "🌦️"
+    },
+
+    63:{
+      text:
+        "Rain",
+      icon:
+        "🌧️"
+    },
+
+    65:{
+      text:
+        "Heavy rain",
+      icon:
+        "🌧️"
+    },
+
+    80:{
+      text:
+        "Rain showers",
+      icon:
+        "🌦️"
+    },
+
+    81:{
+      text:
+        "Rain showers",
+      icon:
+        "🌧️"
+    },
+
+    82:{
+      text:
+        "Heavy showers",
+      icon:
+        "⛈️"
+    },
+
+    95:{
+      text:
+        "Thunderstorm",
+      icon:
+        "⛈️"
+    },
+
+    96:{
+      text:
+        "Thunderstorm",
+      icon:
+        "⛈️"
+    },
+
+    99:{
+      text:
+        "Severe thunderstorm",
+      icon:
+        "⛈️"
+    }
+
+  };
+
+
+  return (
+    map[code] ||
+    {
+      text:
+        "Unknown",
+      icon:
+        "🌤️"
+    }
+  );
+
+}
+
+
+/* ========================================
+   HTML SAFETY
+======================================== */
+
+function escapeHTML(
+  value
+){
+
+  return String(value)
+
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
+
+}
+
+
+/* ========================================
+   START WEATHER
+======================================== */
+
+updateWeather();
+
+</script>
+
+</body>
+</html>
